@@ -1,0 +1,2 @@
+#!/bin/bash
+dmenu -fn Monospace-10 -P -p "$1" <&- && echo

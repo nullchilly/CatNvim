@@ -1,0 +1,121 @@
+configuration {
+	modi:				"drun";
+	font:				"JetBrains Mono 13";
+	show-icons:                     true;
+	icon-theme: 			"Reversal-dark";
+	display-drun: 			"";
+	drun-display-format:            "{name}";
+	sidebar-mode: 			false;
+
+  /* mouse */
+  /* hover-select: true; */
+  /* me-select-entry: ""; */
+  /* me-accept-entry: [ MousePrimary, MouseSecondary, MouseDPrimary ]; */
+}
+
+@theme "/dev/null"
+
+/*
+  Copyright © Blacksuan19 @ 2020
+  part of material ocean colorscheme
+  licensed under GNU's GPL 3
+*/
+
+* {
+  background: #0f111a;
+  foreground: #f1f1f1;
+  selected: #ff4151;
+}
+
+window {
+  transparency: "real";
+  background-color: @background;
+  text-color: @foreground;
+  height: 30%;
+  width: 20%;
+}
+
+prompt {
+  enabled: true;
+  padding: 4px 4px 6px 6px;
+  background-color: @background;
+  text-color: @foreground;
+}
+
+textbox-prompt-colon {
+  expand: false;
+  background-color: @background;
+  padding: 4px 0px 0px 6px;
+}
+
+inputbar {
+  children: [ textbox-prompt-colon, entry ];
+  background-color: @background;
+  text-color: @foreground;
+  expand: false;
+  border: 0px 0px 0px 0px;
+  border-radius: 0px;
+  border-color: @selected;
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 4px 0px;
+  position: center;
+}
+
+entry {
+  background-color: @background;
+  text-color: @foreground;
+  placeholder-color: @foreground;
+  expand: true;
+  horizontal-align: 0;
+  blink: true;
+  padding: 4px 0px 0px 4px;
+}
+
+case-indicator {
+  background-color: @background;
+  text-color: @foreground;
+  spacing: 0;
+}
+
+listview {
+  background-color: @background;
+  columns: 1;
+  spacing: 5px;
+  cycle: true;
+  dynamic: true;
+  layout: vertical;
+}
+
+mainbox {
+  background-color: @background;
+  children: [ inputbar, listview ];
+  spacing: 5px;
+  padding: 5px 5px 5px 5px;
+}
+
+element {
+  background-color: @background;
+  text-color: @foreground;
+  orientation: horizontal;
+  border-radius: 4px;
+  padding: 6px 6px 6px 6px;
+}
+
+element-text, element-icon {
+    background-color: inherit;
+    text-color: inherit;
+}
+
+element-icon {
+  size: 18px;
+  border: 4px;
+}
+
+element selected {
+  background-color: @selected;
+  text-color: @background;
+  border: 0px;
+  border-radius: 0px;
+  border-color: @selected;
+}
+

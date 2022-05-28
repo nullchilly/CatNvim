@@ -1,0 +1,16 @@
+set ratios 1:2:3
+set previewer ~/.config/lf/lf_kitty_preview
+set cleaner ~/.config/lf/lf_kitty_clean
+map . set hidden!
+
+cmd delete ${{
+	clear; tput cup $(($(tput lines)/3)); tput bold
+	set -f
+	printf "%s\n\t" "$fx"
+	printf "delete?[y/N]"
+	read ans
+	[ $ans = "y" ] && mv $fx ~/.local/share/Trash/files/
+}}
+
+map D delete
+map r rename

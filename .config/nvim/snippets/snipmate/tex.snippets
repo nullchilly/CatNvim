@@ -1,0 +1,91 @@
+snippet template
+	\documentclass{article} 
+	\usepackage[utf8]{inputenc, vietnam}
+	\usepackage{enumitem, amsmath, esint, systeme, graphicx, fontawesome5, titlesec}
+	\usepackage{MnSymbol}%
+	\usepackage{wasysym}%
+	% \usepackage[most]{tcolorbox}
+	\usepackage[scale=.95,type1]{cabin}
+	\usepackage[framemethod=tikz]{mdframed}
+	\graphicspath{ {./images/} }
+
+	\usepackage[legalpaper,margin=1in]{geometry}
+
+	\setlength{\parindent}{10pt}
+	% \setlength{\parskip}{1em}
+	\renewcommand{\baselinestretch}{1.2}
+
+	\title{}
+	\date{}
+	\author{}
+
+	\usepackage{tabularray}
+
+	\newcounter{Def}[section]
+	\newenvironment{Def}[1][]{%
+		\ifstrempty{#1}%
+		{\mdfsetup{%
+			frametitle={%
+				\tikz[baseline=(current bounding box.east),outer sep=0pt]
+				\node[line width=1pt,anchor=east,rectangle,draw=blue!20,fill=white]
+			{\strut \color{black}{Definition}~};}}
+		}%
+		{\mdfsetup{%
+			frametitle={%
+				\tikz[baseline=(current bounding box.east),outer sep=0pt]
+				\node[line width=1pt,anchor=east,rectangle,draw=blue!20,fill=white]
+			{\strut \color{black}{Definition}~:~\color{blue4}{#1}};}}%
+		}%
+		\mdfsetup{innertopmargin=2pt,linecolor=blue!20,%
+							linewidth=1pt,topline=true,%
+							frametitleaboveskip=\dimexpr-\ht\strutbox\relax,}
+		\begin{mdframed}[]\relax%
+		}{\end{mdframed}}
+
+	%%%%%%%%%%%%%%%% Integral
+	\makeatletter
+	%% make esint definition in line with amsmath
+	\@for\next:={int,iint,iiint,iiiint,dotsint,oint,oiint,sqint,sqiint,
+		ointctrclockwise,ointclockwise,varointclockwise,varointctrclockwise,
+		fint,varoiint,landupint,landdownint}\do{%
+			\expandafter\edef\csname\next\endcsname{%
+				\noexpand\DOTSI
+				\expandafter\noexpand\csname\next op\endcsname
+				\noexpand\ilimits@
+			}%
+		}
+	\makeatother
+
+
+	\mdfdefinestyle{theoremstyle}{%
+	linecolor=blue!20,middlelinewidth=1pt,%
+	frametitlerule=true,%
+	apptotikzsetting={\tikzset{mdfframetitlebackground/.append style={%
+	shade,left color=blue!20, right color=white}}},
+	frametitlerulecolor=white,
+	frametitlerulewidth=1pt,
+	innertopmargin=\topskip,
+	}
+	\mdtheorem[style=theoremstyle]{properties}{Properties}
+
+	\begin{document}
+		$1	
+	\end{document}
+autosnippet mk
+	\$$1\$
+autosnippet dm
+	\[
+		$1
+	\]
+autosnippet =>
+	\implies
+autosnippet =<
+	\impliesby
+autosnippet <->
+	\leftrightarrow
+autosnippet !=
+	\neg
+autosnippet sum
+	\sum_{n=${1:1}}^{${2:\infty}} ${3:a_n z^n}
+autosnippet lim
+	\lim_{${1:n} \to ${2:\infty}} 

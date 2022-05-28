@@ -1,0 +1,12 @@
+asusctltray &
+udiskie &
+ibus-daemon -drx &
+flameshot &
+unclutter &
+xclip &
+picom --experimental-backends &
+xfce4-power-manager &
+lxqt-policykit-agent &
+xrdb merge ~/.Xresources &
+autorandr --change &
+# vim:ft=bash
