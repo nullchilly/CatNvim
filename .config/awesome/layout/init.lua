@@ -31,7 +31,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
 	s.info_center_toggle = require "widget.info-center-toggle"()
 	s.tray_toggler = require "widget.tray-toggle"
 	s.bluetooth = require "widget.bluetooth"()
-	s.network = require "widget.network"()
+	s.network = require "widget.network"(s.index)
 	local clock = require "widget.clock"(s)
 	s.battery = require "widget.battery"()
 	s.info_center_toggle = require "widget.info-center-toggle"()

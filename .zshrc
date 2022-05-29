@@ -12,7 +12,12 @@ export GO_PATH="$HOME/.local/share/go"
 DEFAULT_USER=tuna
 ZSH_DISABLE_COMPFIX=true
 alias v=nvim
-plugins=(z git web-search copyfile copypath copybuffer sudo zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(z git web-search copyfile copypath copybuffer zsh-autosuggestions zsh-syntax-highlighting vi-mode)
+
+KEYTIMEOUT=0
+VI_MODE_SET_CURSOR=true
+VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
+MODE_INDICATOR="%F{white}+%f"
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
 source $ZSH/oh-my-zsh.sh

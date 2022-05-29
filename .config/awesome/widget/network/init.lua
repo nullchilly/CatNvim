@@ -27,7 +27,7 @@ local interfaces = {
 
 local network_mode = nil
 
-local return_button = function()
+local return_button = function(wibox_screen)
 	local update_notify_no_access = true
 	local notify_no_access_quota = 0
 
@@ -103,7 +103,7 @@ local return_button = function()
 	end
 
 	local network_notify = function(message, title, app_name, icon)
-		if _G.network_noti_hack then
+		if wibox_screen == screen.primary.index then
 			naughty.notification {
 				message = message,
 				title = title,
@@ -111,7 +111,6 @@ local return_button = function()
 				icon = icon,
 			}
 		end
-		_G.network_noti_hack = not _G.network_noti_hack
 	end
 
 	-- Wireless mode / Update

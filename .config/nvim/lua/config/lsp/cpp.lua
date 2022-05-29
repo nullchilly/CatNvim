@@ -1,7 +1,11 @@
-require "lspconfig".ccls.setup {
-	init_options = {
-		clang = {
-			extraArgs = { "-std=c++20", "-Wall", "-O2" },
-		}
-	}
-}
+-- require "lspconfig".ccls.setup {
+-- 	init_options = {
+-- 		clang = {
+-- 			extraArgs = { "-std=c++20", "-Wall", "-O2"},
+-- 		},
+-- 		diagnostics = {
+-- 			onChange = 1
+-- 		}
+-- 	}
+-- }
+require "lspconfig".clangd.setup {}
