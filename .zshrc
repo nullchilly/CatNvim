@@ -4,7 +4,7 @@ fi
 
 export ZSH="$HOME/.oh-my-zsh"
 export SUDO_ASKPASS="$HOME/.local/bin/dpass"
-export XDG_SESSION_TYPE=wayland
+export XDG_SESSION_TYPE=x11
 export TERMINAL="kitty"
 export EDITOR="kitty"
 export GO_PATH="$HOME/.local/share/go"
