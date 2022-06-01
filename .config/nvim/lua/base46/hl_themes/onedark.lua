@@ -12,11 +12,11 @@ M.base_30 = {
 	grey_fg = "#565c64",
 	grey_fg2 = "#6f737b",
 	light_grey = "#6f737b",
-	red = "#d47d85",
+	red = "#e06c75",
 	baby_pink = "#DE8C92",
 	pink = "#ff75a0",
-	line = "#2a2e36", -- for lines like vertsplit
-	green = "#A3BE8C",
+	line = "#31353d", -- for lines like vertsplit
+	green = "#98c379",
 	vibrant_green = "#7eca9c",
 	nord_blue = "#81A1C1",
 	blue = "#61afef",
@@ -30,7 +30,7 @@ M.base_30 = {
 	statusline_bg = "#22262e",
 	lightbg = "#2d3139",
 	lightbg2 = "#262a32",
-	pmenu_bg = "#A3BE8C",
+	pmenu_bg = "#98c379",
 	folder_bg = "#61afef",
 }
 
@@ -52,5 +52,9 @@ M.base_16 = {
 	base0E = "#c678dd",
 	base0F = "#be5046",
 }
+
+M.type = "dark"
+
+M = require("base46").override_theme(M, "onedark")
 
 return M

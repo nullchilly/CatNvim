@@ -4,7 +4,7 @@ M.get_colors = function(type)
 	-- theme paths
 	local theme = vim.g.theme or "radium"
 
-	local present, default_theme = pcall(require, "theme.hl_themes." .. theme)
+	local present, default_theme = pcall(require, "base46.hl_themes." .. theme)
 
 	if present then
 		return default_theme[type]
@@ -31,10 +31,14 @@ M.load_theme = function()
 	end
 
 	-- reload highlights for theme switcher
-	require("plenary.reload").reload_module "theme.integrations"
-	require("plenary.reload").reload_module "theme.highlights"
+	require("plenary.reload").reload_module "base46.integrations"
+	require("plenary.reload").reload_module "base46.chadlights"
 
-	require "theme.highlights"
+	require "base46.chadlights"
+end
+
+M.override_theme = function(default_theme, theme_name)
+	return default_theme
 end
 
 return M

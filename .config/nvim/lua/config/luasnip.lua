@@ -38,5 +38,5 @@ ls.config.set_config {
 	end,
 }
 
-require("luasnip.loaders.from_lua").lazy_load({paths = "./snippets/luasnip"})
-require("luasnip.loaders.from_snipmate").lazy_load({paths = "./snippets/snipmate"})
+require("luasnip.loaders.from_lua").lazy_load { paths = "./snippets/luasnip" }
+require("luasnip.loaders.from_snipmate").lazy_load { paths = "./snippets/snipmate" }

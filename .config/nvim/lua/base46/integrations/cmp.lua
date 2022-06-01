@@ -1,5 +1,5 @@
-local base16 = require("theme").get_colors "base_16"
-local colors = require("theme").get_colors "base_30"
+local base16 = require("base46").get_colors "base_16"
+local colors = require("base46").get_colors "base_30"
 
 return {
 	-- nvim cmp

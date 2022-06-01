@@ -224,8 +224,8 @@ M.lspconfig = {
 
 M.trouble = {
 	n = {
-		["<leader>tl"] = {":TroubleToggle<CR>", "Toggle trouble list"},
-	}
+		["<leader>tl"] = { ":TroubleToggle<CR>", "Toggle trouble list" },
+	},
 }
 
 M.dap = {

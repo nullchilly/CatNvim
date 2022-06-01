@@ -15,7 +15,7 @@ M.base_30 = {
 	red = "#BF616A",
 	baby_pink = "#de878f",
 	pink = "#d57780",
-	line = "#3a404c", -- for lines like vertsplit
+	line = "#414753", -- for lines like vertsplit
 	green = "#A3BE8C",
 	vibrant_green = "#afca98",
 	blue = "#7797b7",
@@ -52,6 +52,17 @@ M.base_16 = {
 	base0E = "#81A1C1",
 	base0F = "#B48EAD",
 }
+
+M.polish_hl = {
+	TSPunctBracket = {
+		fg = M.base_30.white,
+	},
+
+	TSPunctDelimiter = {
+		fg = M.base_30.white,
+	},
+}
+M.type = "dark"
 
 M = require("base46").override_theme(M, "nord")
 

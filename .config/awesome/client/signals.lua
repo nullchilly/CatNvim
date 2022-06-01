@@ -66,3 +66,37 @@ screen.connect_signal("arrange", function(s)
 		end
 	end
 end)
+
+-- Multi monitor handling
+-- Handle screen being removed.
+-- We'll look for same tag names and move clients there, but preserve
+-- the "desired_screen" so we can move them back when it's connected.
+tag.connect_signal("request::screen", function(t)
+    local fallback_tag = nil
+
+    -- find tag with same name on any other screen
+    for other_screen in screen do
+        if other_screen ~= t.screen then
+            fallback_tag = awful.tag.find_by_name(other_screen, t.name)
+            if fallback_tag ~= nil then
+                break
+            end
+        end
+    end
+
+    -- no tag with same name exists, use fallback
+    if fallback_tag == nil then
+        fallback_tag = awful.tag.find_fallback()
+    end
+
+    if not (fallback_tag == nil) then
+        local clients = t:clients()
+        for _, c in ipairs(clients) do
+           c:move_to_tag(fallback_tag)
+           -- preserve info about which screen the window was originally on, so
+           -- we can restore it if the screen is reconnected.
+           c.desired_screen = t.screen.index
+        end
+    end
+end)
+

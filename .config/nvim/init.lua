@@ -5,7 +5,9 @@ end
 
 require "options"
 require "autocmds"
-require "commands"
+vim.schedule(function()
+	require "commands"
+end)
 
 _G.lazy = function(plugin, timer)
 	if plugin then

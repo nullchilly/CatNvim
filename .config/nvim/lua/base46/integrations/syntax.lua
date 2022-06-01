@@ -1,4 +1,4 @@
-local theme = require("theme").get_colors "base_16"
+local theme = require("base46").get_colors "base_16"
 
 -- Standard syntax highlighting
 

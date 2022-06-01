@@ -157,7 +157,8 @@ options.diagnostic = {
 options.lsp_icon = {
 	provider = function()
 		if next(vim.lsp.buf_get_clients()) ~= nil then
-			local lsp_name = vim.lsp.get_active_clients()[1].name
+			local clients = vim.lsp.get_active_clients()
+			local lsp_name = clients[#clients].name
 
 			return "   " .. lsp_name .. " "
 		else

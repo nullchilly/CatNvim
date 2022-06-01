@@ -1,4 +1,4 @@
-local theme = require("theme").get_colors "base_16"
+local theme = require("base46").get_colors "base_16"
 
 return {
 	Normal = {
@@ -55,10 +55,6 @@ return {
 		fg = theme.base08,
 	},
 
-	MatchParen = {
-		bg = theme.base03,
-	},
-
 	ModeMsg = {
 		fg = theme.base0B,
 	},
@@ -95,7 +91,7 @@ return {
 	},
 
 	Visual = {
-		bg = theme.base03,
+		bg = theme.base02,
 	},
 
 	VisualNOS = {

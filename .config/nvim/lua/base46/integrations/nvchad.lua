@@ -1,4 +1,4 @@
-local colors = require("theme").get_colors "base_30"
+local colors = require("base46").get_colors "base_30"
 
 local black = colors.black
 local blue = colors.blue
@@ -98,4 +98,12 @@ return {
 
 	-- packer
 	packerPackageName = { fg = red },
+
+	-- vim-matchup
+	MatchWord = {
+		bg = grey,
+		fg = white,
+	},
+
+	MatchParen = { link = "MatchWord" },
 }

@@ -1,17 +1,17 @@
 local M = {}
 
 M.base_30 = {
-	white = "#abb2bf",
-	darker_black = "#0e0f1a",
+	white = "#A0A8CD",
+	darker_black = "#0c0d18",
 	black = "#11121D", --  nvim bg
 	black2 = "#171823",
-	one_bg = "#191a25",
-	one_bg2 = "#21222d",
-	one_bg3 = "#2c2d38",
-	grey = "#383944",
-	grey_fg = "#3e3f4a",
-	grey_fg2 = "#454651",
-	light_grey = "#4b4c57",
+	one_bg = "#1d1e29",
+	one_bg2 = "#252631",
+	one_bg3 = "#252631",
+	grey = "#40414c",
+	grey_fg = "#474853",
+	grey_fg2 = "#4e4f5a",
+	light_grey = "#545560",
 	red = "#ee6d85",
 	baby_pink = "#fd7c94",
 	pink = "#fe6D85",
@@ -27,11 +27,11 @@ M.base_30 = {
 	teal = "#519aba",
 	orange = "#f6955b",
 	cyan = "#38a89d",
-	statusline_bg = "#151621",
-	lightbg = "#262732",
-	lightbg2 = "#1c1d28",
-	pmenu_bg = "#98C379",
-	folder_bg = "#8094B4",
+	statusline_bg = "#161722",
+	lightbg = "#2a2b36",
+	lightbg2 = "#22232e",
+	pmenu_bg = "#ee6d85",
+	folder_bg = "#7199ee",
 }
 
 M.base_16 = {
@@ -42,7 +42,7 @@ M.base_16 = {
 	base04 = "#30313c",
 	base05 = "#abb2bf",
 	base06 = "#b2b9c6",
-	base07 = "#b9c0cd",
+	base07 = "#A0A8CD",
 	base08 = "#ee6d85",
 	base09 = "#7199ee",
 	base0A = "#7199ee",
@@ -52,6 +52,8 @@ M.base_16 = {
 	base0E = "#a485dd",
 	base0F = "#f3627a",
 }
+
+M.type = "dark"
 
 M = require("base46").override_theme(M, "tokyodark")
 

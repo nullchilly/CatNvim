@@ -26,7 +26,10 @@ local math = {
 
 ls.add_snippets("tex", {
 	s("mk", {
-	  t("$"), i(1), t('$'), i(0)
+		t "$",
+		i(1),
+		t "$",
+		i(0),
 	}),
 	s("beg", {
 		t "\\begin{",

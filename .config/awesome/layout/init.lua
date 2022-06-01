@@ -25,6 +25,20 @@ screen.connect_signal("request::desktop_decoration", function(s)
 		})
 	end
 
+	for _, c in ipairs(client.get()) do
+	   if not (c.desired_screen == nil) then
+		  local tag_name = c.first_tag.name
+		  c:move_to_screen(c.desired_screen)
+		  tag = awful.tag.find_by_name(c.screen, tag_name)
+		  if not (tag == nil) then
+			 c:move_to_tag(tag)
+		  end
+		  -- now clear the "desired_screen"
+		  c.desired_screen = nil
+	   end
+	end
+
+
 	require "widget.volume-slider"
 	require "widget.brightness-slider"
 

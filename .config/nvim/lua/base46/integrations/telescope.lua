@@ -1,4 +1,4 @@
-local colors = require("theme").get_colors "base_30"
+local colors = require("base46").get_colors "base_30"
 
 return {
 

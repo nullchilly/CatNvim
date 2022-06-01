@@ -18,7 +18,7 @@ autocmd("TermOpen", {
 	callback = function()
 		vim.o.number = false
 		vim.o.relativenumber = false
-		vim.cmd'startinsert'
+		vim.cmd "startinsert"
 	end,
 })
 

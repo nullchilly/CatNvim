@@ -16,7 +16,7 @@ end, { nargs = "+" })
 
 cmd("Theme", function(info)
 	vim.g.theme = info.args
-	require("theme").load_theme()
+	require("base46").load_theme()
 end, { nargs = "+" })
 
 local packer_cmd = function(callback)

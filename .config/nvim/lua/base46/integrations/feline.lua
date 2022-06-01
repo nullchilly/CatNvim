@@ -1,4 +1,4 @@
-local colors = require("theme").get_colors "base_30"
+local colors = require("base46").get_colors "base_30"
 
 return {
 
@@ -27,18 +27,18 @@ return {
 		bg = colors.lightbg2,
 	},
 
-	FelineDirname = {
+	FelineDirName = {
 		fg = colors.light_grey,
 		bg = colors.lightbg2,
 	},
 
-	FelineDirname_Separator = {
+	FelineDirName_Separator = {
 		fg = colors.lightbg2,
 		bg = colors.statusline_bg,
 	},
 
 	Feline_diffIcons = {
-		fg = colors.grey_fg2,
+		fg = colors.light_grey,
 		bg = colors.statusline_bg,
 	},
 
@@ -118,6 +118,11 @@ return {
 
 	Feline_EmptySpace = {
 		fg = colors.one_bg2,
+		bg = colors.one_bg,
+	},
+
+	Feline_EmptySpace_git = {
+		fg = colors.one_bg,
 		bg = colors.statusline_bg,
 	},
 
@@ -133,6 +138,6 @@ return {
 
 	Feline_PositionSeparator = {
 		fg = colors.green,
-		bg = colors.grey,
+		bg = colors.one_bg2,
 	},
 }

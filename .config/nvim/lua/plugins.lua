@@ -28,7 +28,7 @@ packer.startup(function(use)
 	use {
 		"nvim-lua/plenary.nvim",
 		config = function()
-			require("theme").load_theme()
+			require("base46").load_theme()
 		end,
 	}
 	use {
@@ -117,14 +117,14 @@ packer.startup(function(use)
 	}
 
 	-- git
-	-- use {
-	-- 	"lewis6991/gitsigns.nvim",
-	-- 	opt = true,
-	-- 	config = function()
-	-- 		require "config.gitsigns"
-	-- 	end,
-	-- 	setup = function() lazy "gitsigns.nvim" end,
-	-- }
+	use {
+		"lewis6991/gitsigns.nvim",
+		opt = true,
+		config = function()
+			require "config.gitsigns"
+		end,
+		setup = function() lazy "gitsigns.nvim" end,
+	}
 
 	use {
 		"andymass/vim-matchup",
@@ -160,18 +160,18 @@ packer.startup(function(use)
 		end,
 	}
 	use {
-		"folke/trouble.nvim",
-		requires = "kyazdani42/nvim-web-devicons",
-		config = function()
-			require("trouble").setup {}
-		end
-	}
-	use {
 		"ray-x/lsp_signature.nvim",
 		config = function()
 			require "config.lsp_signature"
 		end,
 		after = "nvim-lspconfig",
+	}
+	use {
+		"folke/trouble.nvim",
+		requires = "kyazdani42/nvim-web-devicons",
+		config = function()
+			require("trouble").setup {}
+		end,
 	}
 
 	-- Debugger
@@ -193,12 +193,9 @@ packer.startup(function(use)
 	-- Movement
 	use {
 		"xiyaowong/accelerated-jk.nvim",
+		event = "CursorHold",
 		config = function()
 			require("accelerated-jk").setup()
-		end,
-		opt = true,
-		setup = function()
-			lazy "accelerated-jk.nvim"
 		end,
 	}
 	use {
@@ -235,6 +232,15 @@ packer.startup(function(use)
 		config = function()
 			require "config.autopairs"
 		end,
+	}
+	use {
+		"zbirenbaum/copilot.lua",
+		config = function() require("copilot").setup() end,
+		setup = function() lazy("copilot.lua", 100) end
+	}
+	use {
+	   "zbirenbaum/copilot-cmp",
+	   after = { "copilot.lua", "nvim-cmp" },
 	}
 
 	-- IDE layer
@@ -319,7 +325,7 @@ packer.startup(function(use)
 		end,
 		setup = function()
 			vim.api.nvim_create_autocmd("FileType", {
-				pattern = {"tex", "plaintex"},
+				pattern = { "tex", "plaintex" },
 				callback = function()
 					lazy "vimtex"
 				end,

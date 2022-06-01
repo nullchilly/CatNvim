@@ -1,4 +1,4 @@
-local theme = require("theme").get_colors "base_16"
+local theme = require("base46").get_colors "base_16"
 
 return {
 	TSAnnotation = {
@@ -164,5 +164,13 @@ return {
 
 	TSCurrentScope = {
 		bold = true,
+	},
+
+	luaTSField = {
+		fg = theme.base07,
+	},
+
+	TSFieldKey = {
+		fg = theme.base08,
 	},
 }

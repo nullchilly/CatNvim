@@ -67,6 +67,7 @@ cmp.setup {
 		{ name = "buffer" },
 		{ name = "nvim_lua" },
 		{ name = "path" },
+		{ name = "copilot" },
 	},
 	formatting = {
 		format = function(entry, vim_item)
@@ -103,6 +104,7 @@ cmp.setup {
 				nvim_lsp = "[LSP]",
 				nvim_lua = "[Lua]",
 				buffer = "[BUF]",
+				copilot = "[Copilot]",
 			})[entry.source.name]
 
 			return vim_item
