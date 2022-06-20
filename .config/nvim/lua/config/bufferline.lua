@@ -5,8 +5,8 @@ end
 
 bufferline.setup {
 	options = {
-		close_command = "Bdelete! %d",
-		right_mouse_command = "Bdelete! %d",
+		close_command = "bp|sp|bn|bd! %d",
+		right_mouse_command = "bp|sp|bn|bd! %d",
 		left_mouse_command = "buffer %d",
 		offsets = {
 			{

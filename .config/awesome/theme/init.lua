@@ -4,7 +4,6 @@ local beautiful = require "beautiful"
 local filesystem = gears.filesystem
 local dpi = beautiful.xresources.apply_dpi
 local gtk_variable = beautiful.gtk.get_theme_variables
-local gtk_variable = beautiful.gtk.get_theme_variables
 
 local theme_dir = filesystem.get_configuration_dir() .. "/theme"
 local titlebar_theme = "lines"
@@ -159,7 +158,7 @@ theme.groups_bg = "#ffffff" .. "10"
 theme.groups_radius = dpi(9)
 
 -- UI events
-theme.leave_event = transparent
+theme.leave_event = theme.transparent
 theme.enter_event = "#ffffff" .. "10"
 theme.press_event = "#ffffff" .. "15"
 theme.release_event = "#ffffff" .. "10"
@@ -217,17 +216,6 @@ theme.taglist_fg_urgent = "#E91E63" .. "99"
 -- theme.taglist_bg_urgent = '#000000' .. '99'
 theme.taglist_bg_focus = "00"
 theme.taglist_spacing = dpi(0)
-
-theme.tag_preview_widget_border_radius = 0 -- Border radius of the widget (With AA)
-theme.tag_preview_client_border_radius = 0 -- Border radius of each client in the widget (With AA)
-theme.tag_preview_client_opacity = 1 -- Opacity of each client
-theme.tag_preview_client_bg = "#000000" -- The bg color of each client
-theme.tag_preview_client_border_color = "#ffffff" -- The border color of each client
-theme.tag_preview_client_border_width = 0 -- The border width of each client
-theme.tag_preview_widget_bg = "#000000" -- The bg color of the widget
-theme.tag_preview_widget_border_color = "#ffffff" -- The border color of the widget
-theme.tag_preview_widget_border_width = 0 -- The border width of the widget
-theme.tag_preview_widget_margin = 0 -- The margin of the widget
 
 -- Tasklist
 theme.tasklist_font = "Inter Regular 10"

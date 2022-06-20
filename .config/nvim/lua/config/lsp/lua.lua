@@ -16,7 +16,7 @@ require("lspconfig").sumneko_lua.setup {
 				preloadFileSize = 10000,
 			},
 			diagnostics = {
-				globals = { "vim", "awesome", "client", "root", "tag", "screen" },
+				globals = { "vim", "awesome", "client", "root", "tag", "screen", "mouse" },
 			},
 			telemetry = {
 				enable = false,

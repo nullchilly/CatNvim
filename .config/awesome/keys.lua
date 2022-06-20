@@ -4,12 +4,16 @@ require "awful.autofocus"
 
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 local modkey = "Mod4"
+local altkey = "Mod1"
 
 -- Key bindings
 local global_keys = awful.util.table.join(
 
 	-- Hotkeys
-	awful.key({ modkey, "Control" }, "h", hotkeys_popup.show_help, { description = "show help", group = "awesome" }),
+	-- awful.key({ modkey, "Control" }, "h", hotkeys_popup.show_help, { description = "show help", group = "awesome" }),
+	awful.key({ modkey, altkey }, "l", function()
+		awful.spawn("slock", false)
+	end, { description = "lock screen", group = "awesome" }),
 	awful.key({ modkey, "Control" }, "-", function()
 		awful.spawn("setxkbmap -option caps:swapescape", false)
 		awful.spawn("xset r rate 300 50", false)
@@ -18,8 +22,8 @@ local global_keys = awful.util.table.join(
 
 	awful.key({ modkey, "Control" }, "q", awesome.quit, { description = "quit awesome", group = "awesome" }),
 	awful.key({ modkey }, "b", function()
-		myscreen = awful.screen.focused()
-		myscreen.mywibox.visible = not myscreen.mywibox.visible
+		Myscreen = awful.screen.focused()
+		Myscreen.mywibox.visible = not Myscreen.mywibox.visible
 	end, { description = "toggle statusbar", group = "layout" }),
 	awful.key({ modkey }, "l", function()
 		awful.tag.incmwfact(0.05)
@@ -68,26 +72,6 @@ local global_keys = awful.util.table.join(
 	awful.key({ modkey }, "Tab", function()
 		awful.spawn("rofi -show windowcd -modi windowcd,window -theme ~/.config/rofi/theme/window.rasi", false)
 	end, { description = "show windowcd", group = "tag" }),
-	awful.key({ modkey, "Control" }, "w", function()
-		-- tag_view_nonempty(-1)
-		local focused = awful.screen.focused()
-		for _ = 1, #focused.tags do
-			awful.tag.viewidx(-1, focused)
-			if #focused.clients > 0 then
-				return
-			end
-		end
-	end, { description = "view previous non-empty tag", group = "tag" }),
-	awful.key({ modkey, "Control" }, "s", function()
-		-- tag_view_nonempty(1)
-		local focused = awful.screen.focused()
-		for i = 1, #focused.tags do
-			awful.tag.viewidx(1, focused)
-			if #focused.clients > 0 then
-				return
-			end
-		end
-	end, { description = "view next non-empty tag", group = "tag" }),
 	awful.key({ modkey }, ",", function()
 		awful.screen.focus_relative(-1)
 	end, { description = "focus the previous screen", group = "screen" }),
@@ -208,16 +192,16 @@ local global_keys = awful.util.table.join(
 		end
 	end, { description = "toggle systray visibility", group = "Utility" }),
 	awful.key({ modkey }, "Return", function()
-		awful.spawn "kitty"
+		awful.spawn "kitty -1"
 	end, { description = "open default terminal", group = "launcher" }),
 	awful.key({ modkey }, "e", function()
-		awful.spawn "kitty lf"
+		awful.spawn "kitty -1 lf"
 	end, { description = "open default file manager", group = "launcher" }),
 	awful.key({ modkey, "Shift" }, "f", function()
 		awful.spawn "firefox"
 	end, { description = "open default web browser", group = "launcher" }),
 	awful.key({ "Control", "Shift" }, "Escape", function()
-		awful.spawn "kitty btop"
+		awful.spawn "kitty -1 btop"
 	end, { description = "open system monitor", group = "launcher" }),
 	awful.key({ modkey }, "d", function()
 		awful.spawn("rofi -show drun -theme ~/.config/rofi/theme/launcher.rasi", false)

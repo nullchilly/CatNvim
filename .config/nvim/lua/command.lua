@@ -22,7 +22,7 @@ end, { nargs = "+" })
 local packer_cmd = function(callback)
 	return function()
 		vim.cmd "silent! luafile %"
-		require "plugins"
+		require "plugin"
 		require("packer")[callback]()
 	end
 end

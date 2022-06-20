@@ -3,10 +3,11 @@ if present then
 	impatient.enable_profile()
 end
 
-require "options"
-require "autocmds"
+require "option"
+require "autocmd"
 vim.schedule(function()
-	require "commands"
+	require "mapping"
+	require "command"
 end)
 
 _G.lazy = function(plugin, timer)
@@ -25,11 +26,9 @@ if fn.empty(fn.glob(install_path)) > 0 then
 
 	fn.system { "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path }
 
-	print "Packer cloned successfully!"
-
 	-- install plugins + compile their configs
 	vim.cmd "packadd packer.nvim"
-	require "plugins"
-	vim.cmd "PackerSync"
+	require "plugin"
+	require("packer").sync()
 end
-require "plugins"
+require "plugin"

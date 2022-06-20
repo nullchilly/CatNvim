@@ -6,6 +6,7 @@ end
 
 packer.init {
 	auto_clean = true,
+	auto_reload_compiled = true,
 	compile_on_sync = true,
 	disable_commands = true,
 	git = { clone_timeout = 6000 },
@@ -25,45 +26,107 @@ packer.startup(function(use)
 	-- core
 	use "lewis6991/impatient.nvim"
 	use "wbthomason/packer.nvim"
+	use "nvim-lua/plenary.nvim"
 	use {
-		"nvim-lua/plenary.nvim",
+		"catppuccin/nvim",
+		as = "theme",
 		config = function()
-			require("base46").load_theme()
+			vim.g.catppuccin_flavour = "mocha"
+			require("catppuccin").setup {
+				transparent_background = true,
+				integrations = {
+					nvimtree = {
+						enabled = true,
+						show_root = true,
+					}
+				}
+			}
+			require("catppuccin").load()
 		end,
 	}
 	use {
 		"kyazdani42/nvim-web-devicons",
-		after = "plenary.nvim",
-		config = function()
-			require "config.icons"
-		end,
+		after = "theme",
 	}
 	use {
-		"feline-nvim/feline.nvim",
+		'nvim-lualine/lualine.nvim',
 		after = "nvim-web-devicons",
 		config = function()
-			require "config.feline"
-		end,
-	}
-	use {
-		"famiu/bufdelete.nvim",
-		opt = true,
-		setup = function()
-			lazy "bufdelete.nvim"
-		end,
+			require "config.lualine"
+		end
 	}
 	use {
 		"akinsho/bufferline.nvim",
-		requires = "nvim-web-devicons",
+		after = "nvim-web-devicons",
 		config = function()
 			require "config.bufferline"
 		end,
 	}
 	use {
+    "SmiteshP/nvim-gps",
+		after = "nvim-treesitter",
+		config = function()
+			require("nvim-gps").setup()
+		end,
+	}
+	use {
+		"fgheng/winbar.nvim",
+		config = function()
+			require('winbar').setup({
+				enabled = true,
+
+				show_file_path = true,
+				show_symbols = true,
+
+				colors = {
+						path = '', -- You can customize colors like #c946fd
+						file_name = '',
+						symbols = '',
+				},
+
+				icons = {
+						file_icon_default = '',
+						seperator = '>',
+						editor_state = '●',
+						lock_icon = '',
+				},
+
+				exclude_filetype = {
+						'help',
+						'startify',
+						'dashboard',
+						'packer',
+						'neogitstatus',
+						'NvimTree',
+						'Trouble',
+						'alpha',
+						'lir',
+						'Outline',
+						'spectre_panel',
+						'toggleterm',
+						'qf',
+				}
+		})
+		end
+	}
+	use {
 		"lukas-reineke/indent-blankline.nvim",
 		opt = true,
 		config = function()
-			require "config.indent-blankline"
+			require("indent_blankline").setup {
+				char = "▏",
+				filetype_exclude = {
+					"help",
+					"terminal",
+					"packer",
+					"lspinfo",
+					"TelescopePrompt",
+					"TelescopeResults",
+				},
+				buftype_exclude = { "terminal" },
+				show_trailing_blankline_indent = false,
+				show_first_indent_level = false,
+			}
 		end,
 		setup = function()
 			lazy "indent-blankline.nvim"
@@ -77,42 +140,6 @@ packer.startup(function(use)
 		end,
 		setup = function()
 			lazy "nvim-colorizer.lua"
-		end,
-	}
-	use {
-		"rcarriga/nvim-notify",
-		opt = true,
-		config = function()
-			vim.notify = require "notify"
-			vim.notify.setup {
-				background_colour = "Normal",
-				fps = 144,
-				icons = {
-					DEBUG = "",
-					ERROR = "",
-					INFO = "",
-					TRACE = "✎",
-					WARN = "",
-				},
-				level = "info",
-				minimum_width = 50,
-				render = "default",
-				stages = "fade_in_slide_out",
-				timeout = 1000,
-			}
-		end,
-		setup = function()
-			lazy "nvim-notify"
-		end,
-	}
-	use {
-		"folke/which-key.nvim",
-		opt = true,
-		config = function()
-			require "config.whichkey"
-		end,
-		setup = function()
-			lazy "which-key.nvim"
 		end,
 	}
 
@@ -157,20 +184,6 @@ packer.startup(function(use)
 		end,
 		setup = function()
 			lazy "nvim-lspconfig"
-		end,
-	}
-	use {
-		"ray-x/lsp_signature.nvim",
-		config = function()
-			require "config.lsp_signature"
-		end,
-		after = "nvim-lspconfig",
-	}
-	use {
-		"folke/trouble.nvim",
-		requires = "kyazdani42/nvim-web-devicons",
-		config = function()
-			require("trouble").setup {}
 		end,
 	}
 
@@ -233,15 +246,6 @@ packer.startup(function(use)
 			require "config.autopairs"
 		end,
 	}
-	use {
-		"zbirenbaum/copilot.lua",
-		config = function() require("copilot").setup() end,
-		setup = function() lazy("copilot.lua", 100) end
-	}
-	use {
-	   "zbirenbaum/copilot-cmp",
-	   after = { "copilot.lua", "nvim-cmp" },
-	}
 
 	-- IDE layer
 	use {
@@ -250,16 +254,6 @@ packer.startup(function(use)
 		keys = { "gc", "gb" },
 		config = function()
 			require("Comment").setup {}
-		end,
-	}
-	use {
-		"Pocco81/AutoSave.nvim",
-		opt = true,
-		config = function()
-			require "config.autosave"
-		end,
-		setup = function()
-			lazy "AutoSave.nvim"
 		end,
 	}
 
@@ -296,7 +290,6 @@ packer.startup(function(use)
 	}
 	use {
 		"kyazdani42/nvim-tree.lua",
-		ft = "alpha",
 		cmd = { "NvimTreeToggle", "NvimTreeFocus" },
 		config = function()
 			require "config.nvimtree"
@@ -305,15 +298,14 @@ packer.startup(function(use)
 
 	-- Competitive programming
 	use {
-		"MunifTanjim/nui.nvim",
-		cmd = { "CompetiTestRun", "CompetiTestReceive" },
-	}
-	use {
-		"xeluxee/competitest.nvim",
-		after = "nui.nvim",
+		"~/.local/git/cpeditor.nvim",
+		opt = true,
 		config = function()
-			require "config.competitest"
+			require "config.cpeditor"
 		end,
+		setup = function()
+			lazy "cpeditor.nvim"
+		end
 	}
 
 	-- misc
@@ -321,7 +313,11 @@ packer.startup(function(use)
 		"lervag/vimtex",
 		opt = true,
 		config = function()
-			require "config.vimtex"
+			vim.g.tex_flavor = "latex"
+			vim.g.vimtex_view_method = "zathura"
+			vim.g.vimtex_quickfix_mode = 0
+			vim.o.conceallevel = 2
+			vim.g.tex_conceal = "abdmg"
 		end,
 		setup = function()
 			vim.api.nvim_create_autocmd("FileType", {
@@ -330,29 +326,6 @@ packer.startup(function(use)
 					lazy "vimtex"
 				end,
 			})
-		end,
-	}
-	use {
-		"SmiteshP/nvim-gps",
-		after = "nvim-treesitter",
-		config = function()
-			require("nvim-gps").setup()
-		end,
-	}
-	use {
-		"goolord/alpha-nvim",
-		config = function()
-			require "config.alpha"
-		end,
-	}
-	use {
-		"andweeb/presence.nvim",
-		opt = true,
-		config = function()
-			require "config.presence"
-		end,
-		setup = function()
-			lazy "presence.nvim"
-		end,
+		end
 	}
 end)

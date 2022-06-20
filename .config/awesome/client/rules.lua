@@ -58,12 +58,7 @@ ruled.client.connect_signal("request::rules", function()
 			instance = {
 				"file_progress",
 				"Popup",
-				"nm-connection-editor",
-				"blueman-manager",
-				"Bluetooth",
-				"Nmtui",
-				"xfce4-power-manager-settings",
-				"QuakeTerminal",
+				"Toolkit",
 			},
 			class = {
 				"scrcpy",
@@ -83,8 +78,30 @@ ruled.client.connect_signal("request::rules", function()
 			floating = true,
 			focus = awful.client.focus.filter,
 			raise = true,
-			keys = client_keys,
-			buttons = client_buttons,
+			placement = awful.placement.centered,
+		},
+	}
+
+	-- System
+	ruled.client.append_rule {
+		id = "system",
+		rule_any = {
+			instance = {
+				"nm-connection-editor",
+				"blueman-manager",
+				"Bluetooth",
+				"Nmtui",
+				"xfce4-power-manager-settings",
+				"QuakeTerminal",
+			},
+		},
+		properties = {
+			titlebars_enabled = false,
+			skip_decoration = true,
+			ontop = true,
+			floating = true,
+			focus = awful.client.focus.filter,
+			raise = true,
 			placement = awful.placement.centered,
 			width = awful.screen.focused().workarea.width * 0.8,
 			height = awful.screen.focused().workarea.height * 0.8,

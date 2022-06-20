@@ -9,4 +9,5 @@ xfce4-power-manager &
 lxqt-policykit-agent &
 xrdb merge ~/.Xresources &
 autorandr --change &
+kitty -1 --start-as=minimized &
 # vim:ft=bash

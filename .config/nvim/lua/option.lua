@@ -5,12 +5,11 @@ local g = vim.g
 g.did_load_filetypes = 0
 g.do_filetype_lua = 1
 
--- o.confirm = true
 o.laststatus = 3 -- global statusline
 o.title = true
-o.cmdheight = 1
 o.cul = true -- cursor line
 o.showmode = false
+o.cmdheight = 0 -- Thanks shougo
 
 -- Indentline
 o.expandtab = false
@@ -20,7 +19,6 @@ o.smartindent = true
 -- disable tilde on end of buffer: https://github.com/neovim/neovim/pull/8546#issuecomment-643643758
 o.fillchars = { eob = " " }
 
-o.hidden = true
 o.ignorecase = true
 o.smartcase = true
 o.mouse = "a"
