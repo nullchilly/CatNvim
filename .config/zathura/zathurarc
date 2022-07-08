@@ -1,6 +1,6 @@
 set recolor true
-set recolor-lightcolor "#1A1B26"
+set recolor-lightcolor "#101317"
 set recolor-keephue
-set default-bg "#1A1B26"
+set default-bg "#101317"
 set adjust-open "width"
 set selection-clipboard clipboard

@@ -1,4 +1,4 @@
-local present, nvimtree = pcall(require, "nvim-tree")
+local present, nvimtree = pcall(require, 'nvim-tree')
 if not present then
 	return
 end
@@ -6,7 +6,7 @@ end
 nvimtree.setup {
 	disable_netrw = true,
 	hijack_netrw = true,
-	ignore_ft_on_setup = { "alpha" },
+	ignore_ft_on_setup = { 'alpha' },
 	open_on_tab = false,
 	hijack_cursor = true,
 	hijack_unnamed_buffer_when_opening = false,
@@ -16,7 +16,7 @@ nvimtree.setup {
 		update_cwd = false,
 	},
 	view = {
-		side = "left",
+		side = 'left',
 		width = 25,
 	},
 	git = {

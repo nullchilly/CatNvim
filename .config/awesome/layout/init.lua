@@ -77,11 +77,10 @@ screen.connect_signal("request::desktop_decoration", function(s)
 			{
 				layout = wibox.layout.fixed.horizontal,
 				{
-					s.systray,
+					wibox.widget.systray(),
 					margins = dpi(5),
 					widget = wibox.container.margin,
 				},
-				s.tray_toggler,
 				s.network,
 				s.bluetooth,
 				s.battery,

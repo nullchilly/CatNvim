@@ -65,13 +65,13 @@ local global_keys = awful.util.table.join(
 	awful.key({ modkey }, "s", awful.tag.viewnext, { description = "view next tag", group = "tag" }),
 	awful.key(
 		{ modkey },
-		"Escape",
+		"Tab",
 		awful.tag.history.restore,
 		{ description = "alternate between current and previous tag", group = "tag" }
 	),
-	awful.key({ modkey }, "Tab", function()
-		awful.spawn("rofi -show windowcd -modi windowcd,window -theme ~/.config/rofi/theme/window.rasi", false)
-	end, { description = "show windowcd", group = "tag" }),
+	-- awful.key({ modkey }, "Tab", function()
+	-- 	awful.spawn("rofi -show windowcd -modi windowcd,window -theme ~/.config/rofi/theme/window.rasi", false)
+	-- end, { description = "show windowcd", group = "tag" }),
 	awful.key({ modkey }, ",", function()
 		awful.screen.focus_relative(-1)
 	end, { description = "focus the previous screen", group = "screen" }),
