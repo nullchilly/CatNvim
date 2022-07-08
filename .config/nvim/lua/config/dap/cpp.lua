@@ -1,12 +1,12 @@
-local dap = require 'dap'
+local dap = require "dap"
 
 -- 💀 Adjust the path to your executable
-local cmd = '/home/nullchilly/code/codelldb/extension/adapter/codelldb'
+local cmd = "/home/nullchilly/code/codelldb/extension/adapter/codelldb"
 
 dap.adapters.codelldb = function(on_adapter)
 	-- This asks the system for a free port
 	local tcp = vim.loop.new_tcp()
-	tcp:bind('127.0.0.1', 0)
+	tcp:bind("127.0.0.1", 0)
 	local port = tcp:getsockname().port
 	tcp:shutdown()
 	tcp:close()
@@ -16,7 +16,7 @@ dap.adapters.codelldb = function(on_adapter)
 	local stderr = vim.loop.new_pipe(false)
 	local opts = {
 		stdio = { nil, stdout, stderr },
-		args = { '--port', tostring(port) },
+		args = { "--port", tostring(port) },
 	}
 	local handle
 	local pid_or_err
@@ -25,27 +25,27 @@ dap.adapters.codelldb = function(on_adapter)
 		stderr:close()
 		handle:close()
 		if code ~= 0 then
-			print('codelldb exited with code', code)
+			print("codelldb exited with code", code)
 		end
 	end)
 	if not handle then
-		vim.notify('Error running codelldb: ' .. tostring(pid_or_err), vim.log.levels.ERROR)
+		vim.notify("Error running codelldb: " .. tostring(pid_or_err), vim.log.levels.ERROR)
 		stdout:close()
 		stderr:close()
 		return
 	end
-	vim.notify('codelldb started. pid=' .. pid_or_err)
+	vim.notify("codelldb started. pid=" .. pid_or_err)
 	stderr:read_start(function(err, chunk)
 		assert(not err, err)
 		if chunk then
 			vim.schedule(function()
-				require('dap.repl').append(chunk)
+				require("dap.repl").append(chunk)
 			end)
 		end
 	end)
 	local adapter = {
-		type = 'server',
-		host = '127.0.0.1',
+		type = "server",
+		host = "127.0.0.1",
 		port = port,
 	}
 	-- 💀
@@ -58,13 +58,13 @@ end
 
 dap.configurations.cpp = {
 	{
-		name = 'Launch file',
-		type = 'codelldb',
-		request = 'launch',
+		name = "Launch file",
+		type = "codelldb",
+		request = "launch",
 		program = function()
-			return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+			return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
 		end,
-		cwd = '${workspaceFolder}',
+		cwd = "${workspaceFolder}",
 		stopOnEntry = false,
 	},
 }

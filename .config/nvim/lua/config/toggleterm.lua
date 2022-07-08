@@ -1,4 +1,4 @@
-local present, toggleterm = pcall(require, 'toggleterm')
+local present, toggleterm = pcall(require, "toggleterm")
 if not present then
 	return
 end
@@ -6,9 +6,9 @@ end
 toggleterm.setup {
 	-- size can be a number or function which is passed the current terminal
 	size = function(term)
-		if term.direction == 'horizontal' then
+		if term.direction == "horizontal" then
 			return 12
-		elseif term.direction == 'vertical' then
+		elseif term.direction == "vertical" then
 			return vim.o.columns * 0.4
 		end
 	end,
@@ -37,8 +37,8 @@ toggleterm.setup {
 		-- height = <value>,
 		winblend = 3,
 		highlights = {
-			border = 'Normal',
-			background = 'Normal',
+			border = "Normal",
+			background = "Normal",
 		},
 	},
 }
