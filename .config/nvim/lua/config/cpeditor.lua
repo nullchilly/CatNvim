@@ -5,7 +5,11 @@ end
 
 if vim.fn.argv(0) ~= 'cp' then return end
 
-cp.setup {}
+cp.setup {
+	integration = {
+		bufferline = true
+	}
+}
 
 require("bufferline").setup {
 	options = {
@@ -21,11 +25,11 @@ require("bufferline").setup {
 			},
 		},
 		name_formatter = function(tab)  -- tab contains a "name", "path" and "tabnr"
-			local error, problem_name = pcall(function() return vim.api.nvim_tabpage_get_var(tab.tabnr, "cp_problem_name") end)
-			if error == false then
+			local problem = require("cpeditor.problems").list[tab.tabnr]
+			if problem == nil then
 				return tab.name
 			end
-			return problem_name
+			return problem.name
 		end,
 		custom_areas = {
 			right = function()
@@ -53,6 +57,7 @@ require("bufferline").setup {
 		themable = true,
 	},
 }
+
 vim.keymap.set("n", "<leader>x", "<cmd> tabclose <CR>") --"	close buffer"
 vim.keymap.set('n', 't', function()
 	vim.cmd("Cpeditor test " .. vim.v.count)
@@ -62,4 +67,4 @@ vim.keymap.set('n', '<A-c>', function()
 	vim.cmd("Cpeditor compile_run")
 end)
 
-vim.cmd[[Cpeditor receive]]
+vim.cmd[[Cpeditor receive forever]]

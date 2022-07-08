@@ -1,15 +1,11 @@
 local o = vim.opt
 local g = vim.g
 
--- use filetype.lua instead of filetype.vim
-g.did_load_filetypes = 0
-g.do_filetype_lua = 1
-
 o.laststatus = 3 -- global statusline
 o.title = true
 o.cul = true -- cursor line
 o.showmode = false
-o.cmdheight = 0 -- Thanks shougo
+-- o.cmdheight = 0 -- Thanks shougo
 
 -- Indentline
 o.expandtab = false

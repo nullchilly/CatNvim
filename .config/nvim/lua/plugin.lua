@@ -18,7 +18,7 @@ packer.init {
 		moved_sym = "",
 		open_fn = function()
 			return require("packer.util").float { border = "rounded" }
-		end,
+		end
 	},
 }
 
@@ -28,7 +28,7 @@ packer.startup(function(use)
 	use "wbthomason/packer.nvim"
 	use "nvim-lua/plenary.nvim"
 	use {
-		"catppuccin/nvim",
+		"catppuccin/nvim", -- For the love of god use nvim_set_hl
 		as = "theme",
 		config = function()
 			vim.g.catppuccin_flavour = "mocha"
@@ -63,50 +63,11 @@ packer.startup(function(use)
 		end,
 	}
 	use {
-    "SmiteshP/nvim-gps",
-		after = "nvim-treesitter",
+		"~/.local/git/lspsaga.nvim",
+		-- "glepnir/lspsaga.nvim",
+		after = "nvim-lspconfig",
 		config = function()
-			require("nvim-gps").setup()
-		end,
-	}
-	use {
-		"fgheng/winbar.nvim",
-		config = function()
-			require('winbar').setup({
-				enabled = true,
-
-				show_file_path = true,
-				show_symbols = true,
-
-				colors = {
-						path = '', -- You can customize colors like #c946fd
-						file_name = '',
-						symbols = '',
-				},
-
-				icons = {
-						file_icon_default = '',
-						seperator = '>',
-						editor_state = '●',
-						lock_icon = '',
-				},
-
-				exclude_filetype = {
-						'help',
-						'startify',
-						'dashboard',
-						'packer',
-						'neogitstatus',
-						'NvimTree',
-						'Trouble',
-						'alpha',
-						'lir',
-						'Outline',
-						'spectre_panel',
-						'toggleterm',
-						'qf',
-				}
-		})
+			require "config.lsp.saga"
 		end
 	}
 	use {

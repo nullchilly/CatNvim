@@ -1,15 +1,15 @@
 local map = vim.keymap.set
 
 -- Don't copy when pasting over selection
-map('v', 'p', '"_dP', {noremap = true, silent = true})
-map('v', 'P', '"_dp', {noremap = true, silent = true})
+map('v', 'p', '"_dP', {silent = true})
+map('v', 'P', '"_dp', {silent = true})
 
 -- go to beginning and end
 map("i", "<C-b>", "<ESC>^i") -- "論 beginning of line"
 map("i", "<C-e>", "<End>") -- "壟 end of line",
 
 -- navigate within insert mode
-map("i", "C-h>", "<Left>") -- "   move left"
+map("i", "<C-h>", "<Left>") -- "   move left"
 map("i", "<C-l>", "<Right>") -- " move right"
 map("i", "<C-j>", "<Down>") -- " move down"
 map("i", "<C-k>", "<Up>") -- " move up" },
@@ -46,8 +46,8 @@ map("t", "<C-k>", "<C-\\><C-n><C-w>W") --" window up"
 map("n", "<S-b>", "<cmd> enew <CR>") --"烙 new buffer"
 
 -- cycle through buffers
-map("n", "<TAB>", "<cmd> BufferLineCycleNext <CR>") --"  cycle next buffer"
-map("n", "<S-Tab>", "<cmd> BufferLineCyclePrev <CR>") --"  cycle prev buffer"
+map("n", "<A-.>", "<cmd> BufferLineCycleNext <CR>") --"  cycle next buffer"
+map("n", "<A-,>", "<cmd> BufferLineCyclePrev <CR>") --"  cycle prev buffer"
 
 -- close buffer
 map("n", "<leader>x", "<cmd> bp|sp|bn|bd! <CR>") --"	close buffer"
