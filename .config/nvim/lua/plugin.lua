@@ -28,7 +28,7 @@ packer.startup(function(use)
 	use "wbthomason/packer.nvim"
 	use "nvim-lua/plenary.nvim"
 	use {
-		"catppuccin/nvim", -- For the love of god use nvim_set_hl
+		"catppuccin/nvim",
 		as = "theme",
 		config = function()
 			vim.g.catppuccin_flavour = "mocha"
@@ -36,8 +36,7 @@ packer.startup(function(use)
 				transparent_background = true,
 				integrations = {
 					nvimtree = {
-						enabled = true,
-						show_root = true,
+						enabled = false,
 					},
 				},
 			}
@@ -60,13 +59,6 @@ packer.startup(function(use)
 		after = "nvim-web-devicons",
 		config = function()
 			require "config.bufferline"
-		end,
-	}
-	use {
-		"glepnir/lspsaga.nvim",
-		after = "nvim-lspconfig",
-		config = function()
-			require "config.lsp.saga"
 		end,
 	}
 	use {
@@ -140,12 +132,16 @@ packer.startup(function(use)
 		opt = true,
 		config = function()
 			require "config.lsp"
-			vim.defer_fn(function()
-				vim.cmd "silent! e %"
-			end, 0)
 		end,
 		setup = function()
 			lazy "nvim-lspconfig"
+		end,
+	}
+	use {
+		"glepnir/lspsaga.nvim",
+		after = "nvim-lspconfig",
+		config = function()
+			require "config.lsp.saga"
 		end,
 	}
 
@@ -240,11 +236,8 @@ packer.startup(function(use)
 
 	-- File manager
 	use {
-		"ibhagwan/fzf-lua",
-		module = "fzf-lua"
-	}
-	use {
 		"nvim-telescope/telescope-fzf-native.nvim",
+		module = "Telescope",
 		cmd = "Telescope",
 		run = "make",
 	}
@@ -279,7 +272,6 @@ packer.startup(function(use)
 		"lervag/vimtex",
 		opt = true,
 		config = function()
-			vim.g.tex_flavor = "latex"
 			vim.g.vimtex_view_method = "zathura"
 			vim.g.vimtex_quickfix_mode = 0
 			vim.o.conceallevel = 2
@@ -287,7 +279,7 @@ packer.startup(function(use)
 		end,
 		setup = function()
 			vim.api.nvim_create_autocmd("FileType", {
-				pattern = { "tex", "plaintex" },
+				pattern = "tex",
 				callback = function()
 					lazy "vimtex"
 				end,

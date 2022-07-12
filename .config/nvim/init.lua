@@ -31,4 +31,3 @@ if fn.empty(fn.glob(install_path)) > 0 then
 	require "plugin"
 	require("packer").sync()
 end
-require "plugin"

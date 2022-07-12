@@ -45,6 +45,7 @@ o.whichwrap:append "<>[]hl"
 g.mapleader = " "
 
 g.python_recommended_style = 0
+g.tex_flavor = "latex"
 o.pumheight = 15
 o.linebreak = true
 
@@ -59,6 +60,7 @@ local disabled_built_ins = {
 	"netrwSettings",
 	"netrwFileHandlers",
 	"matchit",
+	"matchparen",
 	"tar",
 	"tarPlugin",
 	"rrhelper",
@@ -67,7 +69,6 @@ local disabled_built_ins = {
 	"vimballPlugin",
 	"zip",
 	"zipPlugin",
-	"matchparen",
 	"fzf",
 }
 

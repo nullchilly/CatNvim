@@ -21,18 +21,11 @@ map("n", "<A-h>", "<c-w>5<") --" decrease width"
 map("n", "<A-l>", "<C-w>5>") --" increase width"
 map("n", "<A-s-h>", "<c-w>-") --" decrease height"
 map("n", "<A-s-l>", "<c-w>+") --" increase height"
-map("n", "<C-h>", "<C-w>h") --" window down"
-map("n", "<C-j>", "<C-w>j") --" window up"
-map("n", "<C-k>", "<C-w>k") --" window down"
-map("n", "<C-l>", "<C-w>l") --" window up"
+map("n", "<C-j>", "<C-w>w") --" window up"
+map("n", "<C-k>", "<C-w>W") --" window down"
 
 -- save
 map("n", "<C-s>", "<cmd> w <CR>") --"﬚  save file"
-
--- Will add autocmd
--- map('n', '<F8>', ':TermExec cmd="runhaskell %"<CR>')
--- map('n', '<F9>', ':w | TermExec cmd=":l %"<CR>')
-map("n", "<A-c>", ":VimtexCompile<CR>") -- "run code")
 
 map("v", "<C-c>", '"+y') --"  copy selected text"
 map("v", "<", "<gv") --"move chunk without reset"
@@ -57,6 +50,7 @@ map("n", "<C-n>", "<cmd> NvimTreeToggle <CR>") -- "	toggle nvimtree",
 map("n", "<leader>e", "<cmd> NvimTreeFocus <CR>") -- "	focus nvimtree"
 
 -- telescope
+map("n", "<leader>ff", "<cmd> Telescope<CR>") -- "  find files"
 map("n", "<leader>fd", "<cmd> Telescope find_files <CR>") -- "  find files"
 map("n", "<leader>fa", "<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>") --"  find all"
 map("n", "<leader>fw", "<cmd> Telescope live_grep <CR>") --"	live grep"

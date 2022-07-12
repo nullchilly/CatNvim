@@ -19,3 +19,18 @@ autocmd("InsertLeave", {
 		os.execute "ibus engine xkb:us::eng"
 	end,
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "tex",
+	callback = function()
+		vim.keymap.set("n", "<A-c>", ":VimtexCompile<CR>") -- "run code"
+	end
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "haskell",
+	callback = function()
+		vim.keymap.set('n', '<A-c>', ':w | TermExec go_back=0 cmd=":l %"<CR>')
+		vim.keymap.set('n', '<A-r>', ':TermExec go_back=0 cmd="runhaskell %"<CR>')
+	end
+})

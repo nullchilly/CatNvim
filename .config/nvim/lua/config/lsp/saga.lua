@@ -32,7 +32,7 @@ saga.init_lsp_saga {
 		enable = true,
 		sign = true,
 		sign_priority = 20,
-		virtual_text = true,
+		virtual_text = false,
 	},
 	-- separator in finder
 	finder_separator = "  ",
@@ -97,9 +97,7 @@ saga.init_lsp_saga {
 
 local function get_file_name(include_path)
 	local file_name = require("lspsaga.symbolwinbar").get_file_name()
-	if vim.fn.bufname "%" == "" then
-		return ""
-	end
+	if vim.bo.filetype == "" then return "" end
 	if include_path == false then
 		return file_name
 	end
@@ -127,13 +125,16 @@ local function config_winbar()
 end
 
 vim.api.nvim_create_autocmd(
-	{ "CursorHold", "BufEnter", "BufWinEnter", "CursorMoved", "WinLeave", "User LspasgaUpdateSymbol" },
+	{ "CursorHold", "BufEnter", "BufWinEnter", "CursorMoved", "User LspasgaUpdateSymbol" },
 	{
 		pattern = "*",
 		callback = function()
 			local exclude = {
 				["teminal"] = true,
+				["toggleterm"] = true,
 				["prompt"] = true,
+				["NvimTree"] = true,
+				["help"] = true
 			} -- Ignore float windows and exclude filetype
 			if vim.api.nvim_win_get_config(0).zindex or exclude[vim.bo.filetype] then
 				vim.wo.winbar = ""
@@ -143,3 +144,62 @@ vim.api.nvim_create_autocmd(
 		end,
 	}
 )
+
+local action = require("lspsaga.codeaction")
+
+-- lsp finder to find the cursor word definition and reference
+vim.keymap.set("n", "gh", require("lspsaga.finder").lsp_finder, { silent = true,noremap = true })
+-- or use command LspSagaFinder
+vim.keymap.set("n", "gh", "<cmd>Lspsaga lsp_finder<CR>", { silent = true,noremap = true})
+
+-- code action
+vim.keymap.set("n", "<leader>ca", action.code_action, { silent = true,noremap = true })
+vim.keymap.set("v", "<leader>ca", function()
+    vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<C-U>", true, false, true))
+    action.range_code_action()
+end, { silent = true,noremap =true })
+-- or use command
+vim.keymap.set("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", { silent = true,noremap = true })
+vim.keymap.set("v", "<leader>ca", "<cmd><C-U>Lspsaga range_code_action<CR>", { silent = true,noremap = true })
+
+-- show hover doc
+vim.keymap.set("n", "K", require("lspsaga.hover").render_hover_doc, { silent = true })
+-- or use command
+vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", { silent = true })
+
+-- scroll down hover doc or scroll in definition preview
+vim.keymap.set("n", "<C-f>", function()
+    action.smart_scroll_with_saga(1)
+end, { silent = true })
+-- scroll up hover doc
+vim.keymap.set("n", "<C-b>", function()
+    action.smart_scroll_with_saga(-1)
+end, { silent = true })
+
+-- rename
+vim.keymap.set("n", "gr", require("lspsaga.rename").lsp_rename, { silent = true,noremap = true })
+-- or command
+vim.keymap.set("n", "gr", "<cmd>Lspsaga rename<CR>", { silent = true,noremap = true })
+-- close rename win use <C-c> in insert mode or `q` in normal mode or `:q`
+
+-- preview definition
+vim.keymap.set("n", "gd", require("lspsaga.definition").preview_definition, { silent = true,noremap = true })
+-- or use command
+vim.keymap.set("n", "gd", "<cmd>Lspsaga preview_definition<CR>", { silent = true })
+
+vim.keymap.set("n", "<leader>cd", require("lspsaga.diagnostic").show_line_diagnostics, { silent = true,noremap = true })
+vim.keymap.set("n", "<leader>cd", "<cmd>Lspsaga show_line_diagnostics<CR>", { silent = true,noremap= true })
+
+-- jump diagnostic
+vim.keymap.set("n", "[e", require("lspsaga.diagnostic").goto_prev, { silent = true, noremap =true })
+vim.keymap.set("n", "]e", require("lspsaga.diagnostic").goto_next, { silent = true, noremap =true })
+-- or jump to error
+vim.keymap.set("n", "[E", function()
+  require("lspsaga.diagnostic").goto_prev({ severity = vim.diagnostic.severity.ERROR })
+end, { silent = true, noremap = true })
+vim.keymap.set("n", "]E", function()
+  require("lspsaga.diagnostic").goto_next({ severity = vim.diagnostic.severity.ERROR })
+end, { silent = true, noremap = true })
+-- or use command
+vim.keymap.set("n", "[e", "<cmd>Lspsaga diagnostic_jump_next<CR>", { silent = true, noremap = true })
+vim.keymap.set("n", "]e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", { silent = true, noremap = true })
