@@ -32,10 +32,9 @@ packer.startup(function(use)
 	use "wbthomason/packer.nvim"
 	use "nvim-lua/plenary.nvim"
 	use {
-		"sgoudham/nvim",
+		"catppuccin/nvim",
 		as = "theme",
 		run = "CatppuccinCompile",
-		branch = "dev",
 		config = function()
 			vim.g.catppuccin_flavour = "mocha"
 			require("catppuccin").setup {
