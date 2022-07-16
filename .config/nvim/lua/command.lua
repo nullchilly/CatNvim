@@ -16,6 +16,7 @@ end
 
 cmd("PackerClean", packer_cmd "clean")
 cmd("PackerCompile", packer_cmd "compile")
+cmd("PackerProfile", packer_cmd "profile_output")
 cmd("PackerInstall", packer_cmd "install")
 cmd("PackerStatus", packer_cmd "status")
 cmd("PackerSync", packer_cmd "sync")

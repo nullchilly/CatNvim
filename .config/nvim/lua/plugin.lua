@@ -10,6 +10,10 @@ packer.init {
 	compile_on_sync = true,
 	disable_commands = true,
 	git = { clone_timeout = 6000 },
+	profile = {
+		enable = true,
+		threshold = 0,
+	},
 	display = {
 		working_sym = "ﲊ",
 		error_sym = "✗",
@@ -28,19 +32,27 @@ packer.startup(function(use)
 	use "wbthomason/packer.nvim"
 	use "nvim-lua/plenary.nvim"
 	use {
-		"catppuccin/nvim",
+		"sgoudham/nvim",
 		as = "theme",
+		run = "CatppuccinCompile",
+		branch = "dev",
 		config = function()
 			vim.g.catppuccin_flavour = "mocha"
 			require("catppuccin").setup {
 				transparent_background = true,
+				term_colors = true,
+				compile = {
+					enabled = true,
+					path = vim.fn.stdpath "cache" .. "/catppuccin",
+					suffix = "_compiled",
+				},
 				integrations = {
 					nvimtree = {
 						enabled = false,
 					},
 				},
 			}
-			require("catppuccin").load()
+			vim.cmd "colorscheme catppuccin"
 		end,
 	}
 	use {
@@ -144,6 +156,13 @@ packer.startup(function(use)
 			require "config.lsp.saga"
 		end,
 	}
+	use {
+		"jose-elias-alvarez/null-ls.nvim",
+		after = "nvim-lspconfig",
+		config = function()
+			require "config.lsp.null-ls"
+		end,
+	}
 
 	-- Debugger
 	use {
@@ -237,15 +256,23 @@ packer.startup(function(use)
 	-- File manager
 	use {
 		"nvim-telescope/telescope-fzf-native.nvim",
-		module = "Telescope",
-		cmd = "Telescope",
-		run = "make",
+		after = "telescope.nvim",
+		run = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+		config = function()
+			require("telescope").load_extension "fzf"
+		end,
 	}
 	use {
 		"nvim-telescope/telescope.nvim",
-		after = {
-			"telescope-fzf-native.nvim",
-		},
+		opt = true,
+		config = function()
+			require("telescope").setup {
+				extensions = {},
+			}
+		end,
+		setup = function()
+			lazy "telescope.nvim"
+		end,
 	}
 	use {
 		"kyazdani42/nvim-tree.lua",

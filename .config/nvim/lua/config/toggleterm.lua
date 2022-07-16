@@ -50,5 +50,5 @@ vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "BufWinEnter", "WinEnte
 	pattern = "term://*",
 	callback = function()
 		vim.cmd "startinsert"
-	end
+	end,
 })
