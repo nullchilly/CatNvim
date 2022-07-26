@@ -63,7 +63,7 @@ theme.icons = theme_dir .. "/icons/"
 theme.awesome_icon = theme.icons .. "awesome.svg"
 
 -- Default wallpaper path
-theme.wallpaper = "~/Pictures/wallpapers/black.png"
+theme.wallpaper = "~/Pictures/wallpapers/2k.jpg"
 
 -- Default font
 theme.font = "Inter Regular 10"

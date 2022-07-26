@@ -9,7 +9,7 @@ export TERMINAL="kitty"
 export EDITOR="kitty"
 export GO_PATH="$HOME/.local/share/go"
 
-DEFAULT_USER=tuna
+DEFAULT_USER=nullchilly
 ZSH_DISABLE_COMPFIX=true
 alias v=nvim
 plugins=(z git web-search copyfile copypath copybuffer zsh-autosuggestions zsh-syntax-highlighting vi-mode)

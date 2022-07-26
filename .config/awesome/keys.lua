@@ -151,8 +151,7 @@ local global_keys = awful.util.table.join(
 	end, { description = "previous music", group = "hotkeys" }),
 	awful.key({}, "XF86AudioPlay", function()
 		awful.spawn("mpc toggle", false)
-	end, { description = "play/pause music", group = "hotkeys" }
-),
+	end, { description = "play/pause music", group = "hotkeys" }),
 	awful.key({}, "XF86AudioMicMute", function()
 		awful.spawn("amixer set Capture toggle", false)
 	end, { description = "mute microphone", group = "hotkeys" }),
@@ -191,16 +190,16 @@ local global_keys = awful.util.table.join(
 		end
 	end, { description = "toggle systray visibility", group = "Utility" }),
 	awful.key({ modkey }, "Return", function()
-		awful.spawn "kitty -1"
+		awful.spawn "kitty"
 	end, { description = "open default terminal", group = "launcher" }),
 	awful.key({ modkey }, "e", function()
-		awful.spawn "kitty -1 lf"
+		awful.spawn "kitty lf"
 	end, { description = "open default file manager", group = "launcher" }),
 	awful.key({ modkey, "Shift" }, "f", function()
 		awful.spawn "firefox"
 	end, { description = "open default web browser", group = "launcher" }),
 	awful.key({ "Control", "Shift" }, "Escape", function()
-		awful.spawn "kitty -1 btop"
+		awful.spawn "kitty btop"
 	end, { description = "open system monitor", group = "launcher" }),
 	awful.key({ modkey }, "d", function()
 		awful.spawn("rofi -show drun -theme ~/.config/rofi/theme/launcher.rasi", false)
