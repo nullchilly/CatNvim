@@ -3,7 +3,6 @@ local present, packer = pcall(require, "packer")
 if not present then
 	return
 end
-
 packer.init {
 	auto_clean = true,
 	auto_reload_compiled = true,
@@ -29,29 +28,17 @@ packer.init {
 packer.startup(function(use)
 	-- core
 	use "lewis6991/impatient.nvim"
-	use "wbthomason/packer.nvim"
+	use {
+		"wbthomason/packer.nvim",
+		opt = true,
+	}
 	use "nvim-lua/plenary.nvim"
 	use {
 		"catppuccin/nvim",
 		as = "theme",
-		run = "CatppuccinCompile",
+		run = ":CatppuccinCompile",
 		config = function()
-			vim.g.catppuccin_flavour = "mocha"
-			require("catppuccin").setup {
-				transparent_background = true,
-				term_colors = true,
-				compile = {
-					enabled = true,
-					path = vim.fn.stdpath "cache" .. "/catppuccin",
-					suffix = "_compiled",
-				},
-				integrations = {
-					nvimtree = {
-						enabled = false,
-					},
-				},
-			}
-			vim.cmd "colorscheme catppuccin"
+			require "config.theme"
 		end,
 	}
 	use {
@@ -73,11 +60,24 @@ packer.startup(function(use)
 		end,
 	}
 	use {
+		"nvim-treesitter/nvim-treesitter",
+		opt = true,
+		run = ":TSUpdate",
+		config = function()
+			require "config.treesitter"
+		end,
+		setup = function()
+			lazy "nvim-treesitter"
+		end,
+	}
+	use {
 		"lukas-reineke/indent-blankline.nvim",
 		opt = true,
 		config = function()
 			require("indent_blankline").setup {
 				char = "▏",
+				char_blankline = " ",
+				context_char = "▎",
 				filetype_exclude = {
 					"help",
 					"terminal",
@@ -89,6 +89,8 @@ packer.startup(function(use)
 				buftype_exclude = { "terminal" },
 				show_trailing_blankline_indent = false,
 				show_first_indent_level = false,
+				-- show_current_context = true,
+				-- show_current_context_start = true,
 			}
 		end,
 		setup = function()
@@ -115,25 +117,6 @@ packer.startup(function(use)
 		end,
 		setup = function()
 			lazy "gitsigns.nvim"
-		end,
-	}
-
-	use {
-		"andymass/vim-matchup",
-		opt = true,
-		config = function()
-			vim.g.matchup_matchparen_offscreen = {}
-		end,
-		setup = function()
-			lazy "vim-matchup"
-		end,
-	}
-	use {
-		"nvim-treesitter/nvim-treesitter",
-		after = "vim-matchup",
-		run = ":TSUpdate",
-		config = function()
-			require "config.treesitter"
 		end,
 	}
 
@@ -181,13 +164,6 @@ packer.startup(function(use)
 
 	-- Movement
 	use {
-		"xiyaowong/accelerated-jk.nvim",
-		event = "CursorHold",
-		config = function()
-			require("accelerated-jk").setup()
-		end,
-	}
-	use {
 		"ggandor/lightspeed.nvim",
 		opt = true,
 		setup = function()
@@ -222,6 +198,20 @@ packer.startup(function(use)
 			require "config.autopairs"
 		end,
 	}
+	use {
+		"kylechui/nvim-surround",
+		opt = true,
+		config = function()
+			require("nvim-surround").setup {
+				keymaps = {
+					visual = "gs",
+				},
+			}
+		end,
+		setup = function()
+			lazy "nvim-surround"
+		end,
+	}
 
 	-- IDE layer
 	use {
@@ -254,14 +244,6 @@ packer.startup(function(use)
 
 	-- File manager
 	use {
-		"nvim-telescope/telescope-fzf-native.nvim",
-		after = "telescope.nvim",
-		run = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
-		config = function()
-			require("telescope").load_extension "fzf"
-		end,
-	}
-	use {
 		"nvim-telescope/telescope.nvim",
 		opt = true,
 		config = function()
@@ -271,6 +253,14 @@ packer.startup(function(use)
 		end,
 		setup = function()
 			lazy "telescope.nvim"
+		end,
+	}
+	use {
+		"nvim-telescope/telescope-fzf-native.nvim",
+		after = "telescope.nvim",
+		run = "make",
+		config = function()
+			require("telescope").load_extension "fzf"
 		end,
 	}
 	use {

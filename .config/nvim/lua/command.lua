@@ -8,7 +8,7 @@ cmd("Messages", [[execute "tabnew <bar> pu=execute('messages') <bar> setl nomodi
 
 local packer_cmd = function(callback)
 	return function()
-		vim.cmd "silent! luafile %"
+		vim.cmd.source()
 		require "plugin"
 		require("packer")[callback]()
 	end

@@ -14,7 +14,7 @@ toggleterm.setup {
 	end,
 	-- open_mapping = [[<c-\>]],
 	on_open = function()
-		vim.cmd "startinsert"
+		vim.cmd.startinsert()
 	end,
 	-- on_open = fun(t: Terminal), -- function to run when the terminal opens
 	-- on_close = fun(t: Terminal), -- function to run when the terminal closes
@@ -49,6 +49,6 @@ toggleterm.setup {
 vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "BufWinEnter", "WinEnter" }, {
 	pattern = "term://*",
 	callback = function()
-		vim.cmd "startinsert"
+		vim.cmd.startinsert()
 	end,
 })

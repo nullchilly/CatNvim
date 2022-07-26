@@ -37,10 +37,11 @@ map("t", "<C-k>", "<C-\\><C-n><C-w>W") --" window up"
 
 -- bufferline
 map("n", "<S-b>", "<cmd> enew <CR>") --"烙 new buffer"
-
--- cycle through buffers
 map("n", "<A-.>", "<cmd> BufferLineCycleNext <CR>") --"  cycle next buffer"
 map("n", "<A-,>", "<cmd> BufferLineCyclePrev <CR>") --"  cycle prev buffer"
+map("n", "<A-s-.>", "<cmd> BufferLineMoveNext <CR>") --"  cycle next buffer"
+map("n", "<A-s-,>", "<cmd> BufferLineMovePrev <CR>") --"  cycle prev buffer"
+map("n", "<leader>bf", "<cmd> BufferLinePick <CR>")
 
 -- close buffer
 map("n", "<leader>x", "<cmd> bp|sp|bn|bd! <CR>") --"	close buffer"

@@ -65,12 +65,12 @@ saga.init_lsp_saga {
 			local en = node.range["end"]
 			if button == "l" then
 				if modifier == "c" then
-					print "lspsaga" -- shift right click to print "lspsaga"
+					print "lspsaga" -- ctrl left click to print "lspsaga"
 				end -- jump to node's ending line+char
 				if clicks == 2 then
 					-- double left click to visual select
 					vim.fn.cursor(st.line + 1, st.character + 1)
-					vim.cmd "normal v"
+					vim.cmd.normal "v"
 					vim.fn.cursor(en.line + 1, en.character + 1)
 				else -- jump to node's starting line+char
 					vim.fn.cursor(st.line + 1, st.character + 1)
@@ -83,7 +83,7 @@ saga.init_lsp_saga {
 			elseif button == "m" then
 				-- middle click to visual select node
 				vim.fn.cursor(st.line + 1, st.character + 1)
-				vim.cmd "normal v"
+				vim.cmd.normal "v"
 				vim.fn.cursor(en.line + 1, en.character + 1)
 			end
 		end,
@@ -163,8 +163,6 @@ local action = require "lspsaga.codeaction"
 
 -- lsp finder to find the cursor word definition and reference
 vim.keymap.set("n", "gh", require("lspsaga.finder").lsp_finder, { silent = true, noremap = true })
--- or use command LspSagaFinder
-vim.keymap.set("n", "gh", "<cmd>Lspsaga lsp_finder<CR>", { silent = true, noremap = true })
 
 -- code action
 vim.keymap.set("n", "<leader>ca", action.code_action, { silent = true, noremap = true })
@@ -172,14 +170,9 @@ vim.keymap.set("v", "<leader>ca", function()
 	vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<C-U>", true, false, true))
 	action.range_code_action()
 end, { silent = true, noremap = true })
--- or use command
-vim.keymap.set("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", { silent = true, noremap = true })
-vim.keymap.set("v", "<leader>ca", "<cmd><C-U>Lspsaga range_code_action<CR>", { silent = true, noremap = true })
 
 -- show hover doc
 vim.keymap.set("n", "K", require("lspsaga.hover").render_hover_doc, { silent = true })
--- or use command
-vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", { silent = true })
 
 -- scroll down hover doc or scroll in definition preview
 vim.keymap.set("n", "<C-f>", function()
@@ -192,14 +185,10 @@ end, { silent = true })
 
 -- rename
 vim.keymap.set("n", "gr", require("lspsaga.rename").lsp_rename, { silent = true, noremap = true })
--- or command
-vim.keymap.set("n", "gr", "<cmd>Lspsaga rename<CR>", { silent = true, noremap = true })
 -- close rename win use <C-c> in insert mode or `q` in normal mode or `:q`
 
 -- preview definition
 vim.keymap.set("n", "gd", require("lspsaga.definition").preview_definition, { silent = true, noremap = true })
--- or use command
-vim.keymap.set("n", "gd", "<cmd>Lspsaga preview_definition<CR>", { silent = true })
 
 vim.keymap.set(
 	"n",
@@ -207,7 +196,6 @@ vim.keymap.set(
 	require("lspsaga.diagnostic").show_line_diagnostics,
 	{ silent = true, noremap = true }
 )
-vim.keymap.set("n", "<leader>cd", "<cmd>Lspsaga show_line_diagnostics<CR>", { silent = true, noremap = true })
 
 -- jump diagnostic
 vim.keymap.set("n", "[e", require("lspsaga.diagnostic").goto_prev, { silent = true, noremap = true })
@@ -219,6 +207,3 @@ end, { silent = true, noremap = true })
 vim.keymap.set("n", "]E", function()
 	require("lspsaga.diagnostic").goto_next { severity = vim.diagnostic.severity.ERROR }
 end, { silent = true, noremap = true })
--- or use command
-vim.keymap.set("n", "[e", "<cmd>Lspsaga diagnostic_jump_next<CR>", { silent = true, noremap = true })
-vim.keymap.set("n", "]e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", { silent = true, noremap = true })

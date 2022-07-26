@@ -1,32 +1,5 @@
 local autocmd = vim.api.nvim_create_autocmd
 
--- Ibus typing
-local ibus_cur = "xkb:us::eng"
-autocmd("InsertEnter", {
-	pattern = { "*.tex", "*.md" },
-	callback = function()
-		os.execute("ibus engine " .. ibus_cur)
-	end,
-})
-autocmd("InsertLeave", {
-	pattern = { "*.tex", "*.md" },
-	callback = function()
-		local f = io.popen("ibus engine", "r")
-		if f then
-			ibus_cur = f:read "*a"
-			f:close()
-		end
-		os.execute "ibus engine xkb:us::eng"
-	end,
-})
-
-autocmd("FileType", {
-	pattern = "tex",
-	callback = function()
-		vim.keymap.set("n", "<A-c>", ":VimtexCompile<CR>") -- "run code"
-	end,
-})
-
 autocmd("FileType", {
 	pattern = "haskell",
 	callback = function()
@@ -35,9 +8,44 @@ autocmd("FileType", {
 	end,
 })
 
-autocmd("User", {
-	pattern = "PackerCompileDone",
-	callback = function()
-		vim.cmd "CatppuccinCompile"
-	end,
-})
+vim.defer_fn(function()
+	-- Ibus typing
+	local ibus_cur = "xkb:us::eng"
+	autocmd("InsertEnter", {
+		pattern = { "*.tex", "*.md" },
+		callback = function()
+			os.execute("ibus engine " .. ibus_cur)
+		end,
+	})
+	autocmd("InsertLeave", {
+		pattern = { "*.tex", "*.md" },
+		callback = function()
+			local f = io.popen("ibus engine", "r")
+			if f then
+				ibus_cur = f:read "*a"
+				f:close()
+			end
+			os.execute "ibus engine xkb:us::eng"
+		end,
+	})
+	autocmd("User", {
+		pattern = "PackerCompileDone",
+		callback = function()
+			require("catppuccin").compile()
+			vim.defer_fn(function()
+				vim.cmd.colorscheme "catppuccin"
+			end, 0)
+		end,
+	})
+
+	autocmd("BufWritePost", {
+		pattern = "*.lua",
+		callback = function()
+			vim.defer_fn(function()
+				if vim.fn.expand("%:p"):match(vim.fn.resolve(vim.fn.stdpath "config")) then
+					vim.cmd.PackerCompile()
+				end
+			end, 0)
+		end,
+	})
+end, 0)

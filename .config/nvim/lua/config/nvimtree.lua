@@ -15,8 +15,10 @@ nvimtree.setup {
 		enable = true,
 		update_cwd = false,
 	},
+	sync_root_with_cwd = true,
 	view = {
 		width = 25,
+		hide_root_folder = true,
 	},
 	git = {
 		enable = false,
