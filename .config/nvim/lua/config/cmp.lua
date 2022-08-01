@@ -10,28 +10,16 @@ end
 
 vim.opt.completeopt = "menuone,noselect"
 
-local function border(hl_name)
-	return {
-		{ "╭", hl_name },
-		{ "─", hl_name },
-		{ "╮", hl_name },
-		{ "│", hl_name },
-		{ "╯", hl_name },
-		{ "─", hl_name },
-		{ "╰", hl_name },
-		{ "│", hl_name },
-	}
-end
-
 -- nvim-cmp setup
 cmp.setup {
 	window = {
 		completion = {
-			border = border "CmpBorder",
-			winhighlight = "Normal:CmpPmenu,CursorLine:PmenuSel,Search:None",
+			border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+			winhighlight = "Normal:CmpPmenu,FloatBorder:CmpBorder,CursorLine:PmenuSel,Search:None",
 		},
 		documentation = {
-			border = border "CmpBorder",
+			border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+			winhighlight = "Normal:CmpPmenu,FloatBorder:CmpBorder,CursorLine:PmenuSel,Search:None",
 		},
 	},
 	experimental = {
@@ -87,10 +75,10 @@ cmp.setup {
 		end, { "i", "s" }),
 	},
 	sources = {
+		{ name = "nvim_lua" },
 		{ name = "nvim_lsp" },
 		{ name = "luasnip" },
 		{ name = "buffer" },
-		{ name = "nvim_lua" },
 		{ name = "path" },
 	},
 	formatting = {

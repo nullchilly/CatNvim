@@ -14,10 +14,9 @@ catppuccin.setup {
 	custom_highlights = {
 		CmpBorder = { fg = "#3e4145" },
 	},
-	transprent_background = true,
 	term_colors = true,
 	compile = {
-		enabled = true,
+		enabled = false,
 	},
 	integrations = {
 		nvimtree = {
@@ -27,7 +26,8 @@ catppuccin.setup {
 			enabled = true,
 			enable_ui = true,
 		},
-		lightspeed = true,
+		lsp_saga = true,
+		-- lightspeed = true,
 	},
 }
 

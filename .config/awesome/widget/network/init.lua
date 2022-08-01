@@ -103,14 +103,14 @@ local return_button = function(wibox_screen)
 	end
 
 	local network_notify = function(message, title, app_name, icon)
-		if wibox_screen == screen.primary.index then
-			naughty.notification {
-				message = message,
-				title = title,
-				app_name = app_name,
-				icon = icon,
-			}
-		end
+		-- if wibox_screen == screen.primary.index then
+		-- 	naughty.notification {
+		-- 		message = message,
+		-- 		title = title,
+		-- 		app_name = app_name,
+		-- 		icon = icon,
+		-- 	}
+		-- end
 	end
 
 	-- Wireless mode / Update
