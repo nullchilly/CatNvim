@@ -10,6 +10,7 @@ catppuccin.setup {
 		},
 	},
 	custom_highlights = {
+		VertSplit = { fg = "#313244" },
 		CmpBorder = { fg = "#3e4145" },
 	},
 	term_colors = true,
