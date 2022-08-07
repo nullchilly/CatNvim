@@ -11,31 +11,23 @@ packer.init {
 	},
 }
 
-local use = function(conf)
-	if type(conf.config) == "string" then conf.config = "require'" .. conf.config .. "'" end
-	if type(conf.setup) == "string" then conf.setup = "lazy'" .. conf.setup .. "'" end
-	if conf.setup then conf.opt = true end
-	packer.use(conf)
+local use = function(plugin)
+	return function(opts)
+		opts[1] = plugin
+		if type(opts.config) == "string" then opts.config = "require'" .. opts.config .. "'" end
+		if type(opts.setup) == "string" then opts.setup = "lazy'" .. opts.setup .. "'" end
+		if opts.setup then opts.opt = true end
+		packer.use(opts)
+	end
 end
 
 -- core
-use { "nvim-lua/plenary.nvim", module = "plenary" }
-use { "kyazdani42/nvim-web-devicons", module = "nvim-web-devicons" }
-use {
-	dev("~/.local/git/catppuccin", "catppuccin/nvim"),
-	as = "theme",
-	run = ":CatppuccinCompile",
-	config = "config.theme",
-}
-use { "nvim-lualine/lualine.nvim", config = "config.lualine" }
-use {
-	"akinsho/bufferline.nvim",
-	module = "bufferline",
-	event = { "BufNewFile", "BufRead", "TabEnter" },
-	config = "config.bufferline",
-}
-use {
-	"nvim-treesitter/nvim-treesitter",
+use "nvim-lua/plenary.nvim" { module = "plenary" }
+use "kyazdani42/nvim-web-devicons" { module = "nvim-web-devicons" }
+use "catppuccin/nvim" { as = "theme", run = ":CatppuccinCompile", config = "config.theme" }
+use "nvim-lualine/lualine.nvim" { config = "config.lualine" }
+use "akinsho/bufferline.nvim" { event = { "BufNewFile", "BufRead", "TabEnter" }, config = "config.bufferline" }
+use "nvim-treesitter/nvim-treesitter" {
 	run = ":TSUpdate",
 	config = function()
 		require("nvim-treesitter.configs").setup {
@@ -49,8 +41,7 @@ use {
 	end,
 	setup = "nvim-treesitter",
 }
-use { -- When will treesitter's latex support conceal?
-	"lervag/vimtex",
+use "lervag/vimtex" {
 	config = function()
 		vim.g.vimtex_view_method = "zathura"
 		vim.g.vimtex_quickfix_mode = 0
@@ -59,8 +50,7 @@ use { -- When will treesitter's latex support conceal?
 	end,
 	setup = function() lazyft("tex", "vimtex") end,
 }
-use {
-	"lukas-reineke/indent-blankline.nvim",
+use "lukas-reineke/indent-blankline.nvim" {
 	config = function()
 		require("indent_blankline").setup {
 			char = "▏",
@@ -71,8 +61,7 @@ use {
 		}
 	end,
 }
-use {
-	"norcalli/nvim-colorizer.lua",
+use "norcalli/nvim-colorizer.lua" {
 	config = function()
 		require("colorizer").setup()
 		vim.api.nvim_command "ColorizerAttachToBuffer"
@@ -81,10 +70,9 @@ use {
 }
 
 -- git
-use { "tpope/vim-fugitive", cmd = { "G", "Git" } }
-use { "TimUntersberger/neogit", cmd = "Neogit", config = function() require("neogit").setup {} end }
-use {
-	"lewis6991/gitsigns.nvim",
+use "tpope/vim-fugitive" { cmd = { "G", "Git" } }
+use "TimUntersberger/neogit" { cmd = "Neogit", config = function() require("neogit").setup {} end }
+use "lewis6991/gitsigns.nvim" {
 	config = function() require "config.gitsigns" end,
 	setup = function()
 		if vim.fn.isdirectory ".git" ~= 0 then lazy "gitsigns.nvim" end
@@ -92,25 +80,23 @@ use {
 }
 
 -- lsp
-use { "folke/lua-dev.nvim", module = "lua-dev" }
-use { "neovim/nvim-lspconfig", config = "config.lsp", setup = "nvim-lspconfig" }
-use { "glepnir/lspsaga.nvim", after = "nvim-lspconfig", config = "config.lsp.saga" }
-use { "jose-elias-alvarez/null-ls.nvim", after = "nvim-lspconfig", config = "config.lsp.null-ls" }
+use "folke/lua-dev.nvim" { module = "lua-dev" }
+use "neovim/nvim-lspconfig" { config = "config.lsp", setup = "nvim-lspconfig" }
+use "glepnir/lspsaga.nvim" { after = "nvim-lspconfig", config = "config.lsp.saga" }
+use "jose-elias-alvarez/null-ls.nvim" { after = "nvim-lspconfig", config = "config.lsp.null-ls" }
 
 -- Debugger
-use { "mfussenegger/nvim-dap", module = "dap", config = "config.dap" }
-use { "rcarriga/nvim-dap-ui", module = "dapui", config = "config.dap.ui" }
+use "mfussenegger/nvim-dap" { module = "dap", config = "config.dap" }
+use "rcarriga/nvim-dap-ui" { module = "dapui", config = "config.dap.ui" }
 
 -- Movement
-use {
-	"ggandor/leap.nvim",
+use "ggandor/leap.nvim" {
 	keys = { "s", "S", "z", "Z", "x", "X" },
 	config = function() require("leap").set_default_keymaps() end,
 }
 
 -- Auto complete
-use {
-	"hrsh7th/nvim-cmp",
+use "hrsh7th/nvim-cmp" {
 	event = "InsertEnter",
 	requires = {
 		{ "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" },
@@ -120,56 +106,49 @@ use {
 	},
 	config = "config.cmp",
 }
-use { "L3MON4D3/LuaSnip", after = "nvim-cmp", config = "config.luasnip" }
-use {
-	"windwp/nvim-autopairs",
+use "L3MON4D3/LuaSnip" { after = "nvim-cmp", config = "config.luasnip" }
+use "windwp/nvim-autopairs" {
 	after = "nvim-cmp",
 	config = function()
 		require("nvim-autopairs").setup()
 		require("cmp").event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
 	end,
 }
-use {
-	"kylechui/nvim-surround",
+use "kylechui/nvim-surround" {
 	after = "leap.nvim",
 	config = function() require("nvim-surround").setup { keymaps = { visual = "gs" } } end,
 }
-use {
-	"numToStr/Comment.nvim",
+use "numToStr/Comment.nvim" {
 	module = "Comment",
 	keys = { "gc", "gb" },
 	config = function() require("Comment").setup {} end,
 }
 
 -- Terminal
-use { "akinsho/toggleterm.nvim", cmd = { "ToggleTerm", "TermExec" }, config = "config.toggleterm" }
+use "akinsho/toggleterm.nvim" { cmd = { "ToggleTerm", "TermExec" }, config = "config.toggleterm" }
 
 -- File manager
-use {
-	"nvim-telescope/telescope.nvim",
+use "nvim-telescope/telescope.nvim" {
 	module = "telescope",
 	cmd = "Telescope",
 	config = function() require("telescope").setup() end,
 }
-use {
-	"nvim-telescope/telescope-fzf-native.nvim",
+use "nvim-telescope/telescope-fzf-native.nvim" {
 	after = "telescope.nvim",
 	run = "make",
 	config = function() require("telescope").load_extension "fzf" end,
 }
-use { "kyazdani42/nvim-tree.lua", cmd = { "NvimTreeToggle", "NvimTreeFocus" }, config = "config.nvimtree" }
+use "kyazdani42/nvim-tree.lua" { cmd = { "NvimTreeToggle", "NvimTreeFocus" }, config = "config.nvimtree" }
 
 -- Competitive programming
-use {
-	dev("~/.local/git/cpeditor.nvim", "nullchilly/cpeditor.nvim"),
+use "nullchilly/cpeditor.nvim" {
 	config = "config.cpeditor",
 	cond = function() return vim.fn.argv(0) == "cp" end,
 }
 
 -- Misc
-use { "lewis6991/impatient.nvim", module = "impatient" }
-use {
-	"wbthomason/packer.nvim",
+use "lewis6991/impatient.nvim" { module = "impatient" }
+use "wbthomason/packer.nvim" {
 	cmd = {
 		"PackerSnapshot",
 		"PackerSnapshotRollback",
