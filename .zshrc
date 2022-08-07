@@ -14,7 +14,7 @@ ZSH_DISABLE_COMPFIX=true
 alias v=nvim
 plugins=(z git web-search copyfile copypath copybuffer zsh-autosuggestions zsh-syntax-highlighting vi-mode)
 
-KEYTIMEOUT=0
+KEYTIMEOUT=1
 VI_MODE_SET_CURSOR=true
 VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
 MODE_INDICATOR="%F{white}+%f"

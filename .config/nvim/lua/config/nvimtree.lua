@@ -1,12 +1,9 @@
 local present, nvimtree = pcall(require, "nvim-tree")
-if not present then
-	return
-end
+if not present then return end
 
 nvimtree.setup {
 	disable_netrw = true,
 	hijack_netrw = true,
-	ignore_ft_on_setup = { "alpha" },
 	open_on_tab = false,
 	hijack_cursor = true,
 	hijack_unnamed_buffer_when_opening = false,
@@ -18,7 +15,7 @@ nvimtree.setup {
 	sync_root_with_cwd = true,
 	view = {
 		width = 25,
-		hide_root_folder = true,
+		hide_root_folder = false,
 	},
 	git = {
 		enable = false,

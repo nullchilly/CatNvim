@@ -1,7 +1,5 @@
 local present, cmp = pcall(require, "cmp")
-if not present then
-	return
-end
+if not present then return end
 
 local has_words_before = function()
 	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -26,9 +24,7 @@ cmp.setup {
 		ghost_text = true,
 	},
 	snippet = {
-		expand = function(args)
-			require("luasnip").lsp_expand(args.body)
-		end,
+		expand = function(args) require("luasnip").lsp_expand(args.body) end,
 	},
 	mapping = {
 		["<C-n>"] = cmp.mapping(function(fallback)

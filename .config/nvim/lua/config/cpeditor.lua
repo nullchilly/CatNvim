@@ -1,11 +1,7 @@
 local present, cp = pcall(require, "cpeditor")
-if not present then
-	return
-end
+if not present then return end
 
-if vim.fn.argv(0) ~= "cp" then
-	return
-end
+if vim.fn.argv(0) ~= "cp" then return end
 
 cp.setup {
 	integration = {
@@ -28,9 +24,7 @@ require("bufferline").setup {
 		},
 		name_formatter = function(tab) -- tab contains a "name", "path" and "tabnr"
 			local problem = require("cpeditor.problems").list[tab.tabnr]
-			if problem == nil then
-				return tab.name
-			end
+			if problem == nil then return tab.name end
 			return problem.name
 		end,
 		custom_areas = {
@@ -61,12 +55,8 @@ require("bufferline").setup {
 }
 
 vim.keymap.set("n", "<leader>x", "<cmd> tabclose <CR>") --"	close buffer"
-vim.keymap.set("n", "t", function()
-	vim.cmd("Cpeditor test " .. vim.v.count)
-end)
+vim.keymap.set("n", "t", function() vim.cmd("Cpeditor test " .. vim.v.count) end)
 
-vim.keymap.set("n", "<A-c>", function()
-	vim.cmd "Cpeditor compile_run"
-end)
+vim.keymap.set("n", "<A-c>", function() vim.cmd "Cpeditor compile_run" end)
 
-vim.cmd [[Cpeditor receive forever]]
+vim.api.nvim_command "Cpeditor receive forever"

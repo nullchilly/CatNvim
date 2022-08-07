@@ -1,7 +1,5 @@
 local present, catppuccin = pcall(require, "catppuccin")
-if not present then
-	return
-end
+if not present then return end
 
 vim.g.catppuccin_flavour = "mocha"
 
@@ -16,7 +14,7 @@ catppuccin.setup {
 	},
 	term_colors = true,
 	compile = {
-		enabled = false,
+		enabled = true,
 	},
 	integrations = {
 		nvimtree = {
@@ -27,8 +25,9 @@ catppuccin.setup {
 			enable_ui = true,
 		},
 		lsp_saga = true,
-		-- lightspeed = true,
+		leap = true,
+		neogit = true,
 	},
 }
 
-vim.cmd.colorscheme "catppuccin"
+vim.api.nvim_command "colorscheme catppuccin"

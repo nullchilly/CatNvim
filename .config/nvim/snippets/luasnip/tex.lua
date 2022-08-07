@@ -19,9 +19,7 @@ local types = require "luasnip.util.types"
 local conds = require "luasnip.extras.expand_conditions"
 
 local math = {
-	condition = function()
-		return vim.fn["vimtex#syntax#in_mathzone"]() == 1 and true or false
-	end,
+	condition = function() return vim.fn["vimtex#syntax#in_mathzone"]() == 1 and true or false end,
 }
 
 ls.add_snippets("tex", {
@@ -64,9 +62,7 @@ ls.add_snippets("tex", {
 		i(0),
 	}, math),
 	s({ trig = "(%d+)/", regTrig = true }, {
-		f(function(_, snip)
-			return "\\frac{" .. snip.captures[1] .. "}{"
-		end, { 1 }),
+		f(function(_, snip) return "\\frac{" .. snip.captures[1] .. "}{" end, { 1 }),
 		i(1),
 		i(2),
 		t "}",
@@ -75,29 +71,21 @@ ls.add_snippets("tex", {
 	s("/", {
 		f(function(_, snip)
 			local visual = snip.env.TM_SELECTED_TEXT
-			if next(visual) == nil then
-				return "/"
-			end
+			if next(visual) == nil then return "/" end
 			return ("\\frac{" .. visual[1] .. "}{") or {}
 		end, {}),
 		i(1),
 		f(function(_, snip)
 			local visual = snip.env.TM_SELECTED_TEXT
-			if next(visual) == nil then
-				return {}
-			end
+			if next(visual) == nil then return {} end
 			return "}"
 		end, {}),
 	}, math),
 	s({ trig = "(%a)(%d) ", regTrig = true }, {
-		f(function(_, snip)
-			return snip.captures[1] .. "_" .. snip.captures[2] .. " "
-		end, {}),
+		f(function(_, snip) return snip.captures[1] .. "_" .. snip.captures[2] .. " " end, {}),
 	}, math),
 	s({ trig = "(%a)(%d+) ", regTrig = true }, {
-		f(function(_, snip)
-			return snip.captures[1] .. "_{" .. snip.captures[2] .. "} "
-		end, {}),
+		f(function(_, snip) return snip.captures[1] .. "_{" .. snip.captures[2] .. "} " end, {}),
 	}, math),
 	s("->", {
 		t "\\to ",

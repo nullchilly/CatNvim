@@ -1,8 +1,8 @@
 local map = vim.keymap.set
 
 -- Don't copy when pasting over selection
-map("v", "p", '"_dP', { silent = true })
-map("v", "P", '"_dp', { silent = true })
+map("v", "p", '"_dP')
+map("v", "P", '"_dp')
 
 -- go to beginning and end
 map("i", "<C-b>", "<ESC>^i") -- "論 beginning of line"
@@ -41,10 +41,11 @@ map("n", "<A-.>", "<cmd> BufferLineCycleNext <CR>") --"  cycle next buffer"
 map("n", "<A-,>", "<cmd> BufferLineCyclePrev <CR>") --"  cycle prev buffer"
 map("n", "<A-s-.>", "<cmd> BufferLineMoveNext <CR>") --"  cycle next buffer"
 map("n", "<A-s-,>", "<cmd> BufferLineMovePrev <CR>") --"  cycle prev buffer"
-map("n", "<leader>bf", "<cmd> BufferLinePick <CR>")
-
--- close buffer
+map("n", "<A-f>", "<cmd> BufferLinePick <CR>")
 map("n", "<leader>x", "<cmd> bp|sp|bn|bd! <CR>") --"	close buffer"
+for i = 1, 9 do
+	map("n", "<A-" .. i .. ">", function() require("bufferline").go_to_buffer(i) end)
+end
 
 -- nvimtree
 map("n", "<C-n>", "<cmd> NvimTreeToggle <CR>") -- "	toggle nvimtree",
@@ -70,8 +71,23 @@ map("n", "<leader>pt", "<cmd> Telescope terms <CR>") --"	pick hidden term"
 map("t", "<A-i>", "<C-\\><C-n>:ToggleTerm direction=float<CR>") --"	toggle floating term"
 map("t", "<C-\\>", "<C-\\><C-n>:ToggleTerm direction=horizontal<CR>") --"	new horizontal term"
 map("t", "<A-v>", "<C-\\><C-n>:ToggleTerm direction=vertical<CR>") --"	new vertical term"
-map("n", "<A-i>", ":ToggleTerm direction=float<CR>") --"	toggle floating term"
+map("n", "<A-i>", "<cmd> ToggleTerm direction=float<CR>") --"	toggle floating term"
 
 -- new
-map("n", "<C-\\>", ":ToggleTerm direction=horizontal<CR>") --"	new horizontal term"
-map("n", "<A-v>", ":ToggleTerm direction=vertical<CR>") --"	new vertical term"
+map("n", "<C-\\>", "<cmd> ToggleTerm direction=horizontal<CR>") --"	new horizontal term"
+map("n", "<A-v>", "<cmd> ToggleTerm direction=vertical<CR>") --"	new vertical term"
+
+-- lspsaga
+map("n", "gh", "<cmd>Lspsaga lsp_finder<CR>")
+map("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>")
+map("v", "<leader>ca", "<cmd><C-U>Lspsaga range_code_action<CR>")
+map("n", "K", "<cmd>Lspsaga hover_doc<CR>")
+map("n", "<C-f>", function() require("lspsaga.action").smart_scroll_with_saga(1) end)
+map("n", "<C-b>", function() require("lspsaga.action").smart_scroll_with_saga(-1) end)
+-- map("n", "gs", "<Cmd>Lspsaga signature_help<CR>")
+map("n", "gr", "<cmd>Lspsaga rename<CR>")
+map("n", "gd", "<cmd>Lspsaga preview_definition<CR>")
+map("n", "<leader>cd", "<cmd>Lspsaga show_line_diagnostics<CR>")
+map("n", "<leader>cd", "<cmd>Lspsaga show_cursor_diagnostics<CR>")
+map("n", "[e", "<cmd>Lspsaga diagnostic_jump_next<CR>")
+map("n", "]e", "<cmd>Lspsaga diagnostic_jump_prev<CR>")

@@ -24,9 +24,7 @@ dap.adapters.codelldb = function(on_adapter)
 		stdout:close()
 		stderr:close()
 		handle:close()
-		if code ~= 0 then
-			print("codelldb exited with code", code)
-		end
+		if code ~= 0 then print("codelldb exited with code", code) end
 	end)
 	if not handle then
 		vim.notify("Error running codelldb: " .. tostring(pid_or_err), vim.log.levels.ERROR)
@@ -37,11 +35,7 @@ dap.adapters.codelldb = function(on_adapter)
 	vim.notify("codelldb started. pid=" .. pid_or_err)
 	stderr:read_start(function(err, chunk)
 		assert(not err, err)
-		if chunk then
-			vim.schedule(function()
-				require("dap.repl").append(chunk)
-			end)
-		end
+		if chunk then vim.schedule(function() require("dap.repl").append(chunk) end) end
 	end)
 	local adapter = {
 		type = "server",
@@ -51,9 +45,7 @@ dap.adapters.codelldb = function(on_adapter)
 	-- 💀
 	-- Wait for codelldb to get ready and start listening before telling nvim-dap to connect
 	-- If you get connect errors, try to increase 500 to a higher value, or check the stderr (Open the REPL)
-	vim.defer_fn(function()
-		on_adapter(adapter)
-	end, 500)
+	vim.defer_fn(function() on_adapter(adapter) end, 500)
 end
 
 dap.configurations.cpp = {
@@ -61,9 +53,7 @@ dap.configurations.cpp = {
 		name = "Launch file",
 		type = "codelldb",
 		request = "launch",
-		program = function()
-			return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-		end,
+		program = function() return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file") end,
 		cwd = "${workspaceFolder}",
 		stopOnEntry = false,
 	},
