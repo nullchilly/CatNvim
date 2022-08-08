@@ -56,10 +56,11 @@ map("n", "<leader>ff", "<cmd> Telescope<CR>") -- "  find files"
 map("n", "<leader>fd", "<cmd> Telescope find_files <CR>") -- "  find files"
 map("n", "<leader>fa", "<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>") --"  find all"
 map("n", "<leader>fw", "<cmd> Telescope live_grep <CR>") --"	live grep"
+map("n", "<leader>fp", "<cmd> Telescope pickers <CR>") --"	pickers"
+map("n", "<leader>fr", "<cmd> Telescope registers <CR>") --"	pickers"
 map("n", "<leader>fb", "<cmd> Telescope buffers <CR>") --"  find buffers"
 map("n", "<leader>fh", "<cmd> Telescope help_tags <CR>") --"  help page"
 map("n", "<leader>fo", "<cmd> Telescope oldfiles <CR>") --"	find oldfiles"
-map("n", "<leader>tk", "<cmd> Telescope keymaps <CR>") --"	show keys"
 
 -- git
 map("n", "<leader>cm", "<cmd> Telescope git_commits <CR>") --"	git commits"

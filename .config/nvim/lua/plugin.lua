@@ -2,7 +2,6 @@ local present, packer = pcall(require, "packer")
 if not present then return end
 
 packer.init {
-	auto_reload_compiled = true,
 	compile_on_sync = true,
 	git = { clone_timeout = 6000 },
 	profile = { enable = true },
@@ -13,7 +12,8 @@ packer.init {
 
 local use = function(plugin)
 	return function(opts)
-		opts[1] = plugin
+		opts = opts or {}
+		if not opts[1] or vim.fn.isdirectory(vim.fn.expand(opts[1])) == 0 then opts[1] = plugin end
 		if type(opts.config) == "string" then opts.config = "require'" .. opts.config .. "'" end
 		if type(opts.setup) == "string" then opts.setup = "lazy'" .. opts.setup .. "'" end
 		if opts.setup then opts.opt = true end
@@ -24,9 +24,18 @@ end
 -- core
 use "nvim-lua/plenary.nvim" { module = "plenary" }
 use "kyazdani42/nvim-web-devicons" { module = "nvim-web-devicons" }
-use "catppuccin/nvim" { as = "theme", run = ":CatppuccinCompile", config = "config.theme" }
+use "catppuccin/nvim" {
+	"~/.local/git/catppuccin",
+	as = "theme",
+	run = ":CatppuccinCompile",
+	config = "config.theme",
+}
 use "nvim-lualine/lualine.nvim" { config = "config.lualine" }
-use "akinsho/bufferline.nvim" { event = { "BufNewFile", "BufRead", "TabEnter" }, config = "config.bufferline" }
+use "akinsho/bufferline.nvim" {
+	module = "bufferline",
+	event = { "BufNewFile", "BufRead", "TabEnter" },
+	config = "config.bufferline",
+}
 use "nvim-treesitter/nvim-treesitter" {
 	run = ":TSUpdate",
 	config = function()
@@ -125,6 +134,7 @@ use "numToStr/Comment.nvim" {
 }
 
 -- Terminal
+use "luukvbaal/stabilize.nvim" { setup = "stabilize.nvim" } -- https://github.com/neovim/neovim/pull/19243
 use "akinsho/toggleterm.nvim" { cmd = { "ToggleTerm", "TermExec" }, config = "config.toggleterm" }
 
 -- File manager
@@ -142,11 +152,18 @@ use "kyazdani42/nvim-tree.lua" { cmd = { "NvimTreeToggle", "NvimTreeFocus" }, co
 
 -- Competitive programming
 use "nullchilly/cpeditor.nvim" {
+	"~/.local/git/cpeditor.nvim",
 	config = "config.cpeditor",
 	cond = function() return vim.fn.argv(0) == "cp" end,
 }
 
 -- Misc
+use "famiu/nvim-reload" {
+	cmd = { "Reload", "Restart" },
+	config = function()
+		require("nvim-reload").post_reload_hook = function() vim.api.nvim_command "luafile plugin/packer_compiled.lua" end
+	end,
+}
 use "lewis6991/impatient.nvim" { module = "impatient" }
 use "wbthomason/packer.nvim" {
 	cmd = {
