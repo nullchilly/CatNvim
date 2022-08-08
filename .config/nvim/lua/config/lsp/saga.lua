@@ -102,12 +102,16 @@ end
 
 local events = { "BufEnter", "BufWinEnter", "CursorMoved" }
 
+local packer = vim.api.nvim_create_augroup("UserLspsaga", { clear = true })
+
 vim.api.nvim_create_autocmd(events, {
+	group = group,
 	pattern = "*",
 	callback = function() config_winbar() end,
 })
 
 vim.api.nvim_create_autocmd("User", {
+	group = group,
 	pattern = "LspsagaUpdateSymbol",
 	callback = function() config_winbar() end,
 })
