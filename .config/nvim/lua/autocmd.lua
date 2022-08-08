@@ -1,39 +1,40 @@
 local autocmd = vim.api.nvim_create_autocmd
 
 -- packer
-local packer = vim.api.nvim_create_augroup("UserPacker", { clear = true })
+local config_path = vim.fn.resolve(vim.fn.stdpath "config")
+
+vim.api.nvim_create_augroup("Packer", { clear = true })
+
 autocmd("BufWritePost", {
-	group = packer,
+	group = "Packer",
 	pattern = "*.lua",
 	callback = function()
-		vim.defer_fn(function()
-			if vim.fn.expand("%:p"):match(vim.fn.resolve(vim.fn.stdpath "config")) then vim.api.nvim_command "silent source | PackerCompile" end
-		end, 0)
+		if vim.fn.expand("%:p"):match(config_path) then vim.api.nvim_command "silent source | PackerCompile" end
 	end,
 })
 
 autocmd("User", {
-	group = packer,
+	group = "Packer",
 	pattern = "PackerCompileDone",
-	callback = function() -- Autocompile colorscheme
+	callback = function()
+		vim.g.loaded_telescope = 0
 		require("catppuccin").compile()
-		vim.api.nvim_command "colorscheme catppuccin"
-		vim.defer_fn(function() vim.api.nvim_command "Restart" end, 0)
+		vim.defer_fn(function() vim.api.nvim_command "colorscheme catppuccin" end, 0)
 	end,
 })
 
 -- ibus
 local ibus_cur = "xkb:us::eng"
 
-local ibus = vim.api.nvim_create_augroup("UserIbus", { clear = true })
+vim.api.nvim_create_augroup("Ibus", { clear = true })
 autocmd("InsertEnter", {
-	group = ibus,
+	group = "Ibus",
 	pattern = { "*.tex", "*.md" },
 	callback = function() os.execute("ibus engine " .. ibus_cur) end,
 })
 
 autocmd("InsertLeave", {
-	group = ibus,
+	group = "Ibus",
 	pattern = { "*.tex", "*.md" },
 	callback = function()
 		local f = io.popen("ibus engine", "r")

@@ -2,6 +2,7 @@ local present, packer = pcall(require, "packer")
 if not present then return end
 
 packer.init {
+	auto_reload_compiled = true,
 	compile_on_sync = true,
 	git = { clone_timeout = 6000 },
 	profile = { enable = true },
@@ -89,7 +90,6 @@ use "lewis6991/gitsigns.nvim" {
 }
 
 -- lsp
-use "folke/lua-dev.nvim" { module = "lua-dev" }
 use "neovim/nvim-lspconfig" { config = "config.lsp", setup = "nvim-lspconfig" }
 use "glepnir/lspsaga.nvim" { after = "nvim-lspconfig", config = "config.lsp.saga" }
 use "jose-elias-alvarez/null-ls.nvim" { after = "nvim-lspconfig", config = "config.lsp.null-ls" }
@@ -134,7 +134,6 @@ use "numToStr/Comment.nvim" {
 }
 
 -- Terminal
-use "luukvbaal/stabilize.nvim" { setup = "stabilize.nvim" } -- https://github.com/neovim/neovim/pull/19243
 use "akinsho/toggleterm.nvim" { cmd = { "ToggleTerm", "TermExec" }, config = "config.toggleterm" }
 
 -- File manager
@@ -158,12 +157,6 @@ use "nullchilly/cpeditor.nvim" {
 }
 
 -- Misc
-use "famiu/nvim-reload" {
-	cmd = { "Reload", "Restart" },
-	config = function()
-		require("nvim-reload").post_reload_hook = function() vim.api.nvim_command "luafile plugin/packer_compiled.lua" end
-	end,
-}
 use "lewis6991/impatient.nvim" { module = "impatient" }
 use "wbthomason/packer.nvim" {
 	cmd = {

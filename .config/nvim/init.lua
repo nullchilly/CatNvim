@@ -4,6 +4,7 @@ vim.schedule(function()
 	require "autocmd"
 	require "mapping"
 	require "command"
+	require "utils"
 end)
 
 _G.lazy = function(plugin, timer)
