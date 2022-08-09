@@ -5,7 +5,6 @@ packer.init {
 	auto_reload_compiled = true,
 	compile_on_sync = true,
 	git = { clone_timeout = 6000 },
-	profile = { enable = true },
 	display = {
 		open_fn = function() return require("packer.util").float { border = "single" } end,
 	},
