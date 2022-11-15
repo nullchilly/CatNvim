@@ -1,6 +1,20 @@
 -- vim.diagnostic.config {
 -- 	virtual_text = false,
 -- }
+vim.diagnostic.config {
+	virtual_text = false,
+	update_in_insert = true,
+	underline = true,
+	severity_sort = true,
+	float = {
+		focusable = true,
+		style = "minimal",
+		border = "rounded",
+		source = "always",
+		header = "",
+		prefix = "",
+	},
+}
 
 require("lspconfig").bashls.setup {}
 

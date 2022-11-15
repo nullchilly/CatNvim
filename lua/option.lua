@@ -93,3 +93,5 @@ local default_providers = {
 for _, provider in ipairs(default_providers) do
 	vim.g["loaded_" .. provider .. "_provider"] = 0
 end
+
+vim.api.nvim_create_user_command("W", [[execute 'silent! write !sudo tee % >/dev/null' <bar> edit!]], {})
