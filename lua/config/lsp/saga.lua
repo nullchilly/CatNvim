@@ -22,6 +22,7 @@ local setup = {
 		quit = "q",
 		exec = "<CR>",
 	},
+	custom_kind = require("catppuccin.groups.integrations.lsp_saga").custom_kind(),
 	rename_action_quit = "<C-c>",
 	symbol_in_winbar = {
 		in_custom = true,

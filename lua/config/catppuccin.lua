@@ -5,6 +5,8 @@ catppuccin.setup {
 	flavour = "mocha", -- latte, frappe, macchiato, mocha
 	term_colors = true,
 	transparent_background = false,
+	no_italic = false,
+	no_bold = false,
 	styles = {
 		comments = {},
 		conditionals = {},
@@ -32,11 +34,13 @@ catppuccin.setup {
 				NvimTreeNormal = { bg = "#D1E5F0" },
 			}
 		end,
-		mocha = function(mocha)
+		mocha = function(C)
 			return {
-				TabLineSel = { bg = mocha.pink },
-				NvimTreeNormal = { bg = mocha.none },
-				CmpBorder = { fg = mocha.surface2 },
+				TabLineSel = { bg = C.pink },
+				NvimTreeNormal = { bg = C.none },
+				CmpBorder = { fg = C.surface2 },
+				Pmenu = { bg = C.none },
+				NormalFloat = { bg = C.none },
 			}
 		end,
 	},

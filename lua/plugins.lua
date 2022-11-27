@@ -20,14 +20,20 @@ local use = function(plugin)
 	end
 end
 
-use "nullchilly/unsafe.nvim" {
-	"~/code/git/unsafe.nvim",
+use "nvim-treesitter/playground" {}
+use "kkharji/sqlite.lua" {}
+use "karb94/neoscroll.nvim" {
+	config = function() require("neoscroll").setup() end,
+}
+use "nullchilly/fsread.nvim" {
+	"~/code/git/fsread.nvim",
 }
 use "catppuccin/nvim" {
 	"~/code/git/catppuccin",
 	as = "catppuccin",
 	config = "config.catppuccin",
 }
+
 use "nvim-lua/plenary.nvim" { module = "plenary" }
 use "kyazdani42/nvim-web-devicons" { module = "nvim-web-devicons" }
 use "nvim-lualine/lualine.nvim" { after = "catppuccin", config = "config.lualine" }
@@ -108,6 +114,7 @@ use "luukvbaal/stabilize.nvim" { config = function() require("stabilize").setup(
 use "NvChad/nvim-colorizer.lua" { config = function() require("colorizer").setup {} end }
 use "kylechui/nvim-surround" { config = function() require("nvim-surround").setup {} end }
 use "akinsho/toggleterm.nvim" { cmd = { "ToggleTerm", "TermExec" }, config = "config.toggleterm" }
+use "dstein64/vim-startuptime" { cmd = "StartupTime" }
 use "wbthomason/packer.nvim" {
 	cmd = {
 		"PackerSnapshot",

@@ -52,8 +52,6 @@ cmp.setup {
 		["<Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_next_item()
-			elseif require("luasnip").expand_or_jumpable() then
-				require("luasnip").expand_or_jump()
 			elseif has_words_before() then
 				cmp.complete()
 			else
@@ -63,8 +61,6 @@ cmp.setup {
 		["<S-Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_prev_item()
-			elseif require("luasnip").jumpable(-1) then
-				require("luasnip").jump(-1)
 			else
 				fallback()
 			end
@@ -73,7 +69,6 @@ cmp.setup {
 	sources = {
 		{ name = "nvim_lua" },
 		{ name = "nvim_lsp" },
-		{ name = "luasnip" },
 		{ name = "buffer" },
 		{ name = "path" },
 	},
