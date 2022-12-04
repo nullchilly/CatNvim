@@ -18,13 +18,13 @@ bufferline.setup {
 		tab_size = 10,
 		show_tab_indicators = true,
 		indicator = {
-			style = 'underline'
+			style = "underline",
 		},
 		enforce_regular_tabs = false,
 		view = "multiwindow",
 		show_buffer_close_icons = true,
-		-- separator_style = "thin",
-		separator_style = "slant",
+		separator_style = "thin",
+		-- separator_style = "slant",
 		always_show_bufferline = true,
 		diagnostics = false,
 		themable = true,

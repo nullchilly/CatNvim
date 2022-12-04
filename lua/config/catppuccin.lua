@@ -41,6 +41,7 @@ catppuccin.setup {
 				CmpBorder = { fg = C.surface2 },
 				Pmenu = { bg = C.none },
 				NormalFloat = { bg = C.none },
+				TelescopeBorder = { link = "FloatBorder" },
 			}
 		end,
 	},

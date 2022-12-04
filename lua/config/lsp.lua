@@ -48,7 +48,7 @@ require("lspconfig").sumneko_lua.setup {
 }
 
 -- latex
-require("lspconfig").texlab.setup {}
+-- require("lspconfig").texlab.setup {}
 
 -- haskell
 require("lspconfig").hls.setup {}
@@ -60,3 +60,5 @@ require("lspconfig").pyright.setup {}
 require("lspconfig").java_language_server.setup {
 	cmd = { "/usr/share/java/java-language-server/lang_server_linux.sh" },
 }
+
+require("lspconfig").ltex.setup {}

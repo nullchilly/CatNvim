@@ -19,12 +19,8 @@ local use = function(plugin)
 		packer.use(opts)
 	end
 end
-
+use "~/code/git/unsafe.nvim" {}
 use "nvim-treesitter/playground" {}
-use "kkharji/sqlite.lua" {}
-use "karb94/neoscroll.nvim" {
-	config = function() require("neoscroll").setup() end,
-}
 use "nullchilly/fsread.nvim" {
 	"~/code/git/fsread.nvim",
 }
@@ -36,13 +32,33 @@ use "catppuccin/nvim" {
 
 use "nvim-lua/plenary.nvim" { module = "plenary" }
 use "kyazdani42/nvim-web-devicons" { module = "nvim-web-devicons" }
-use "nvim-lualine/lualine.nvim" { after = "catppuccin", config = "config.lualine" }
+use "nvim-lualine/lualine.nvim" {
+	after = "catppuccin",
+	config = function()
+		require("lualine").setup {
+			options = {
+				icons_enabled = true,
+				theme = "catppuccin",
+				globalstatus = true,
+			},
+			sections = {
+				lualine_a = { "mode" },
+				lualine_b = { "branch", "diff", "diagnostics" },
+				lualine_c = { "filename" },
+				lualine_x = { "filetype" },
+				lualine_y = { "progress" },
+				lualine_z = { "location" },
+			},
+		}
+	end,
+}
 use "akinsho/bufferline.nvim" { config = "config.bufferline", after = "catppuccin" }
 use "nvim-treesitter/nvim-treesitter" {
 	run = ":TSUpdate",
 	config = function()
 		require("nvim-treesitter.configs").setup {
 			auto_install = true,
+			ensure_installed = { "comment" },
 			ignore_install = { "tex", "latex" },
 			highlight = {
 				enable = true,
@@ -73,8 +89,42 @@ use "lewis6991/gitsigns.nvim" {
 
 -- lsp
 use "neovim/nvim-lspconfig" { config = "config.lsp" }
-use "glepnir/lspsaga.nvim" { after = "nvim-lspconfig", config = "config.lsp.saga" }
-use "jose-elias-alvarez/null-ls.nvim" { after = "nvim-lspconfig", config = "config.lsp.null-ls" }
+use "glepnir/lspsaga.nvim" {
+	after = "nvim-lspconfig",
+	config = function()
+		require("lspsaga").init_lsp_saga {
+			code_action_lightbulb = {
+				enable = true,
+				sign = true,
+				sign_priority = 20,
+				virtual_text = false,
+			},
+			max_preview_lines = 10,
+			finder_action_keys = {
+				open = "o",
+				vsplit = "s",
+				split = "i",
+				tabe = "t",
+				quit = "q",
+				scroll_down = "<C-f>",
+				scroll_up = "<C-b>",
+			},
+			code_action_keys = {
+				quit = "q",
+				exec = "<CR>",
+			},
+			custom_kind = require("catppuccin.groups.integrations.lsp_saga").custom_kind(),
+			rename_action_quit = "<C-c>",
+			symbol_in_winbar = {
+				enable = true,
+				separator = " > ",
+				show_file = true,
+			},
+			server_filetype_map = {},
+		}
+	end,
+}
+use "jose-elias-alvarez/null-ls.nvim" { after = "nvim-lspconfig", config = "config.null-ls" }
 
 -- Auto complete
 use "hrsh7th/nvim-cmp" {

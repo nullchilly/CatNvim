@@ -13,6 +13,7 @@ map("i", "<C-h>", "<Left>") -- "   move left"
 map("i", "<C-l>", "<Right>") -- " move right"
 map("i", "<C-j>", "<Down>") -- " move down"
 map("i", "<C-k>", "<Up>") -- " move up" },
+map("n", "<C-d>", "<C-d>zz")
 
 map("n", "<esc>", "<cmd> noh <CR>") -- "  no highlight")
 
@@ -44,7 +45,8 @@ map("n", "<A-s-,>", "<cmd> BufferLineMovePrev <CR>") --"  cycle prev buffer"
 map("n", "<A-f>", "<cmd> BufferLinePick <CR>")
 map("n", "<leader>x", "<cmd> bp|sp|bn|bd! <CR>") --"	close buffer"
 for i = 1, 9 do
-	map("n", "<A-" .. i .. ">", function() require("bufferline").go_to_buffer(i) end)
+	-- map("n", "<A-" .. i .. ">", function() require("bufferline").go_to_buffer(i) end)
+	map("n", "<A-" .. i .. ">", "<cmd>" .. i .. "tabn<CR>")
 end
 
 -- nvimtree

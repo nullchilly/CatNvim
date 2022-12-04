@@ -1,6 +1,7 @@
 local o = vim.opt
 local g = vim.g
 
+o.guicursor:append { "i-c-ci:ver25", "o-v-ve:hor20", "cr-sm-n-r:block" }
 o.laststatus = 3 -- global statusline
 o.title = true
 o.cul = true -- cursor line
