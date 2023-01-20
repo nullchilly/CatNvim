@@ -1,5 +1,6 @@
 local o = vim.opt
 local g = vim.g
+o.wrap = false
 
 o.guicursor:append { "i-c-ci:ver25", "o-v-ve:hor20", "cr-sm-n-r:block" }
 o.laststatus = 3 -- global statusline
@@ -7,6 +8,9 @@ o.title = true
 o.cul = true -- cursor line
 o.showmode = false
 o.cmdheight = 0 -- Thanks shougo
+if vim.version().minor >= 9 then
+	o.splitkeep = "screen" -- Thanks luukvbaal
+end
 
 -- Indentline
 o.expandtab = false
@@ -50,40 +54,6 @@ g.tex_flavor = "latex"
 o.pumheight = 15
 o.linebreak = true
 
-local disabled_built_ins = {
-	"2html_plugin",
-	"getscript",
-	"getscriptPlugin",
-	"gzip",
-	"logipat",
-	"netrw",
-	"netrwPlugin",
-	"netrwSettings",
-	"netrwFileHandlers",
-	"matchit",
-	"tar",
-	"tarPlugin",
-	"rrhelper",
-	"spellfile_plugin",
-	"vimball",
-	"vimballPlugin",
-	"zip",
-	"zipPlugin",
-	"tutor",
-	"rplugin",
-	"syntax",
-	"synmenu",
-	"optwin",
-	"compiler",
-	"bugreport",
-	"ftplugin",
-	"fzf",
-}
-
-for _, plugin in pairs(disabled_built_ins) do
-	vim.g["loaded_" .. plugin] = 1
-end
-
 local default_providers = {
 	"node",
 	"perl",
@@ -94,5 +64,3 @@ local default_providers = {
 for _, provider in ipairs(default_providers) do
 	vim.g["loaded_" .. provider .. "_provider"] = 0
 end
-
-vim.api.nvim_create_user_command("W", [[execute 'silent! write !sudo tee % >/dev/null' <bar> edit!]], {})
