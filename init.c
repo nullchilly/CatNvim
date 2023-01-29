@@ -17,6 +17,7 @@ int luaopen_init(lua_State *L) {
 		"spec": [{
 				"url": "https://github.com/utilyre/barbecue.nvim.git",
         "dependencies": ["SmiteshP/nvim-navic"],
+        "event": "VeryLazy",
 				"opts": {}
 			},
 			{
