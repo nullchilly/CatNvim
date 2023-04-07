@@ -2,10 +2,9 @@
 
 int luaopen_config_options() {
   // Nightly
-  o("laststatus", i(3)); // Thanks famiu
-  o("cmdheight", i(0));  // Thanks shougo
-  if (has_nvim_version("0.9"))
-    o("splitkeep", s("screen")); // Thanks luukvbaal
+  o("laststatus", i(3));       // Thanks famiu
+  o("cmdheight", i(0));        // Thanks shougo
+  o("splitkeep", s("screen")); // Thanks luukvbaal
 
   // Indentline
   o("expandtab", False);

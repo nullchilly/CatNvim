@@ -6,9 +6,9 @@ int luaopen_config_keymaps() {
   map("v", "P", "\"_dp");
 
   // bufferline
-	for (int i = 1; i <= 9; i++) {
-		fmap("n", "<A-%d>", ":%dtabn<CR>", i);
-	}
+  for (int i = 1; i <= 9; i++) {
+    fmap("n", "<A-%d>", ":%dtabn<CR>", i);
+  }
 
   map("n", "<A-.>", ":BufferLineCycleNext <CR>");
   map("n", "<A-s-.>", ":BufferLineMoveNext <CR>");
@@ -31,7 +31,7 @@ int luaopen_config_keymaps() {
   map("n", "<A-s-l>", "<c-w>+");
 
   // nvimtree
-  map("n", "<C-n>", ":NvimTreeToggle<CR>");
+  map("n", "<C-n>", ":Neotree toggle<CR>");
 
   // telescope
   map("n", "<leader>fd", ":Telescope find_files <CR>");
