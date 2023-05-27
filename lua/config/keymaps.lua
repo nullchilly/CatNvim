@@ -1,5 +1,6 @@
 local map = vim.keymap.set
 
+vim.cmd.abb("W SudaWrite")
 map("n", "<A-.>", ":BufferLineCycleNext <CR>")
 map("n", "<A-s-.>", ":BufferLineMoveNext <CR>")
 map("n", "<A-,>", ":BufferLineCyclePrev <CR>")

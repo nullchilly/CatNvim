@@ -1,4 +1,5 @@
 return {
+	"tpope/vim-sleuth",
 	{
 		"nvim-tree/nvim-tree.lua",
 		cmd = { "NvimTreeToggle", "NvimTreeFocus" },
@@ -15,6 +16,7 @@ return {
 			},
 			sync_root_with_cwd = true,
 			view = {
+				preserve_window_proportions = true,
 				-- width = 20,
 				hide_root_folder = false,
 			},

@@ -9,7 +9,7 @@ return {
 		"catppuccin/nvim",
 		name = "catppuccin",
 		opts = {
-			flavour = "mocha",
+			-- flavour = "mocha",
 			term_colors = true,
 			transparent_background = false,
 			styles = {
@@ -34,12 +34,16 @@ return {
 			},
 			custom_highlights = function(C)
 				return {
-					TabLineSel = { bg = C.pink },
+					-- TabLineSel = { bg = C.pink },
 				}
 			end,
 			integrations = {
 				illuminate = true,
+				headlines = true,
 			},
 		},
 	},
+	{ "projekt0n/github-nvim-theme", lazy = true },
+	{ "EdenEast/nightfox.nvim", lazy = true },
+	{ "Mofiqul/vscode.nvim", lazy = true },
 }

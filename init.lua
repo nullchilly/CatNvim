@@ -18,6 +18,11 @@ require("lazy").setup({
 		{ "LazyVim/LazyVim", import = "lazyvim.plugins" },
 		{ import = "plugins" },
 	},
+	dev = {
+		path = "~/code/git/",
+		patterns = { "catppuccin" },
+		fallback = true,
+	},
 	install = { colorscheme = { "catppuccin" } },
 	change_detection = {
 		enabled = true,
