@@ -11,7 +11,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-vim.g.catppuccin_debug = true
+-- vim.g.catppuccin_debug = true
 
 require("lazy").setup({
 	spec = {

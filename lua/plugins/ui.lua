@@ -31,7 +31,7 @@ return {
 		opts = {
 			options = {
 				indicator = {
-					style = "underline",
+					-- style = "underline",
 				},
 			},
 		},
