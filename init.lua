@@ -11,17 +11,10 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- vim.g.catppuccin_debug = true
-
 require("lazy").setup({
 	spec = {
 		{ "LazyVim/LazyVim", import = "lazyvim.plugins" },
 		{ import = "plugins" },
-	},
-	dev = {
-		path = "~/code/git/",
-		patterns = { "catppuccin" },
-		fallback = true,
 	},
 	install = { colorscheme = { "catppuccin" } },
 	change_detection = {

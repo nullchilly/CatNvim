@@ -1,5 +1,5 @@
 return {
-	"tpope/vim-sleuth",
+	{ "lambdalisue/suda.vim", cmd = { "SudaRead", "SudaWrite" } },
 	{
 		"nvim-tree/nvim-tree.lua",
 		cmd = { "NvimTreeToggle", "NvimTreeFocus" },
@@ -63,6 +63,18 @@ return {
 				callback = function()
 					vim.api.nvim_command("startinsert")
 				end,
+			})
+		end,
+	},
+	{
+		"nvim-telescope/telescope.nvim",
+		config = function()
+			require("telescope").setup({
+				pickers = {
+					colorscheme = {
+						enable_preview = true,
+					},
+				},
 			})
 		end,
 	},

@@ -31,6 +31,12 @@ return {
 					crust = "#000000",
 				},
 			},
+			integrations = {
+				dropbar = {
+					enabled = true,
+					color_mode = true,
+				},
+			},
 		},
 	},
 }

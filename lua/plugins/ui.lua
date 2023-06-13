@@ -26,31 +26,26 @@ return {
 		event = "BufRead",
 		config = true,
 	},
-	{
-		"akinsho/bufferline.nvim",
-		opts = {
-			options = {
-				indicator = {
-					-- style = "underline",
-				},
-			},
-		},
-	},
-	{
-		"utilyre/barbecue.nvim",
-		event = "VeryLazy",
-		name = "barbecue",
-		opts = {},
-	},
+	"Bekaboo/dropbar.nvim",
+	{ "SmiteshP/nvim-navic", enabled = false },
 	{
 		"nvim-lualine/lualine.nvim",
+		optional = false,
+		enabled = false,
 		opts = {
 			theme = "catppuccin",
 			options = {
 				component_separators = " ",
 				section_separators = { left = "", right = "" },
 			},
-			extensions = { "quickfix" },
 		},
+	},
+	{
+		"famiu/feline.nvim",
+		config = function()
+			require("feline").setup({
+				components = require("catppuccin.groups.integrations.feline").get(),
+			})
+		end,
 	},
 }

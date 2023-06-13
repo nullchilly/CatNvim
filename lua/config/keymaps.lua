@@ -1,6 +1,6 @@
 local map = vim.keymap.set
 
-vim.cmd.abb("W SudaWrite")
+vim.cmd.abb("W SudaWrite") -- change to map("ca") in the future
 map("n", "<A-.>", ":BufferLineCycleNext <CR>")
 map("n", "<A-s-.>", ":BufferLineMoveNext <CR>")
 map("n", "<A-,>", ":BufferLineCyclePrev <CR>")

@@ -4,6 +4,7 @@ vim.o.tabstop = 2
 vim.o.numberwidth = 2
 vim.o.cmdheight = 0
 vim.o.scrolloff = 0
+vim.o.mousemoveevent = true
 
 vim.o.whichwrap = "<>[]hlb,s"
 vim.g.mapleader = " "
