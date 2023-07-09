@@ -119,6 +119,7 @@ typedef struct {
 #define False                                                                  \
   (Object) { .type = kObjectTypeBoolean, .data.boolean = false }
 
+extern char *get_xdg_home(const int);
 extern char *stdpaths_get_xdg_var(const XDGVarType idx);
 extern char *stdpaths_user_data_subpath(const char *fname);
 extern bool os_isdir(const char *name);
