@@ -1,7 +1,7 @@
 #include "nvim.h"
 
 int luaopen_init(lua_State *L) {
-  char *lazypath = concat_str(get_xdg_home(1), "lazy/lazy.nvim");
+  char *lazypath = concat_str(get_xdg_home(1), "lazy/lazy.nvim/");
   if (os_isdir(lazypath) == false) {
     system(concat_str("git clone --filter=blob:none "
                       "https://github.com/folke/lazy.nvim.git --branch=stable ",
