@@ -190,6 +190,7 @@ extern void nvim_set_var(String name, Object value, Error *err);
   } while (0)
 
 typedef struct lua_State lua_State;
+#define LUA_TABLE(...) #__VA_ARGS__
 #define require_setup(m, s)                                                    \
   do {                                                                         \
     do_cmdline_cmd("lua require('" m "').setup" s);                            \
