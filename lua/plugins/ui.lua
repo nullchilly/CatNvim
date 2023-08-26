@@ -30,8 +30,6 @@ return {
 	{ "SmiteshP/nvim-navic", enabled = false },
 	{
 		"nvim-lualine/lualine.nvim",
-		optional = false,
-		enabled = false,
 		opts = {
 			theme = "catppuccin",
 			options = {
@@ -39,13 +37,5 @@ return {
 				section_separators = { left = "", right = "" },
 			},
 		},
-	},
-	{
-		"famiu/feline.nvim",
-		config = function()
-			require("feline").setup({
-				components = require("catppuccin.groups.integrations.feline").get(),
-			})
-		end,
 	},
 }
