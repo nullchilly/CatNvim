@@ -32,14 +32,17 @@ return {
 	default_config = {
 		cmd = {
 			"node",
-			vim.fn.expand("~/.vscode-server/extensions/ms-python.vscode-pylance-*/dist/server.bundle.js", false, true)[1],
+			vim.fn.expand("~/.vscode/extensions/ms-python.vscode-pylance-*/dist/server.bundle.js", false, true)[1],
 			"--stdio",
 		},
 		filetypes = { "python" },
 		single_file_support = true,
-		root_dir = function(fname)
-			return util.root_pattern(unpack(root_files))(fname)
-		end,
+		root_dir = util.root_pattern(unpack(root_files)),
+		settings = {
+			python = {
+				analysis = {},
+			},
+		},
 	},
 	commands = {
 		PylanceOrganizeImports = {
