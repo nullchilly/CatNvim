@@ -6,6 +6,7 @@ vim.o.cmdheight = 0
 vim.o.laststatus = 3
 vim.o.scrolloff = 0
 vim.o.mousemoveevent = true
+vim.o.cursorline = false
 vim.o.wrap = true
 vim.o.spell = false
 -- vim.o.pumblend = 0

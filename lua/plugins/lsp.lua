@@ -6,12 +6,14 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		opts = {
-			inlay_hints = { enabled = true },
+			-- inlay_hints = { enabled = true },
 			servers = {
 				pylance = {
 					settings = {
 						python = {
 							analysis = {
+								-- include = { "workspaceroot/**" },
+								-- extraPaths = { vim.fn.getcwd() },
 								inlayHints = {
 									variableTypes = true,
 									functionReturnTypes = true,
@@ -26,9 +28,5 @@ return {
 				tsserver = {},
 			},
 		},
-	},
-	{
-		"nvimdev/lspsaga.nvim",
-		config = true,
 	},
 }

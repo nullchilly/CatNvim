@@ -32,7 +32,6 @@ return {
 				},
 			},
 			integrations = {
-				-- neogit = true,
 				telescope = {
 					enabled = true,
 					style = "nvchad",
@@ -41,12 +40,6 @@ return {
 					enabled = true,
 					color_mode = true,
 				},
-				window_picker = true,
-				illuminate = {
-					enabled = true,
-					lsp = false,
-				},
-				notifier = true,
 			},
 		},
 	},
