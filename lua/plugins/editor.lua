@@ -19,7 +19,7 @@ return {
 			view = {
 				preserve_window_proportions = true,
 				-- width = 20,
-				hide_root_folder = false,
+				-- hide_root_folder = false,
 			},
 			git = {
 				enable = false,

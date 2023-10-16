@@ -14,7 +14,9 @@ return {
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		opts = {
-			char = "▏",
+			indent = {
+				char = "▏",
+			},
 		},
 	},
 	{
@@ -27,7 +29,7 @@ return {
 		config = true,
 	},
 	"Bekaboo/dropbar.nvim",
-	{ "SmiteshP/nvim-navic", enabled = false },
+	-- { "SmiteshP/nvim-navic", enabled = false },
 	{
 		"nvim-lualine/lualine.nvim",
 		opts = {
