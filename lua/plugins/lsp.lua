@@ -29,4 +29,9 @@ return {
 			},
 		},
 	},
+	{
+		"hinell/lsp-timeout.nvim",
+		event = "LazyFile",
+		dependencies = { "neovim/nvim-lspconfig" },
+	},
 }

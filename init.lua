@@ -1,3 +1,4 @@
+vim.treesitter.language.register("python", "sage")
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
 	vim.fn.system({
@@ -11,10 +12,18 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+vim.g.catppuccin_debug = true
+vim.g.autoformat = false
+
 require("lazy").setup({
 	spec = {
 		{ "LazyVim/LazyVim", import = "lazyvim.plugins" },
 		{ import = "plugins" },
+	},
+	dev = {
+		path = "~/code/git/",
+		patterns = { "catppuccin" },
+		fallback = true,
 	},
 	install = { colorscheme = { "catppuccin" } },
 	change_detection = {

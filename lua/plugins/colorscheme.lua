@@ -9,6 +9,7 @@ return {
 		"catppuccin/nvim",
 		name = "catppuccin",
 		opts = {
+			no_italic = true,
 			term_colors = true,
 			transparent_background = false,
 			styles = {
@@ -30,8 +31,12 @@ return {
 					mantle = "#000000",
 					crust = "#000000",
 				},
+				latte = {
+					base = "#f6f7f8",
+				},
 			},
 			integrations = {
+				treesitter_context = true,
 				telescope = {
 					enabled = true,
 					style = "nvchad",
