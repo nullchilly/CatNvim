@@ -7,22 +7,21 @@ local function get_pylance()
 	local pylance_path = vim.fn.stdpath("cache") .. "/pylance/"
 	if vim.fn.isdirectory(pylance_path .. version) == 0 then
 		vim.fn.mkdir(pylance_path, "p")
-		os.execute(
-			string.format(
-				[[cd %s && wget %s -O %s.zip &&
-        unzip %s.zip -d %s && rm -r %s.zip && cd %s
-        awk -i inplace 'BEGIN{RS=ORS=";"} /if\(!process/{sub(/return!0x1/, "return!0x0")} 1' extension/dist/server.bundle.js]],
-				pylance_path,
-				download_url,
-				version,
-				version,
-				version,
-				version,
-				version
+		print(
+			os.execute(
+				string.format(
+					[[cd %s && wget %s -O pylance.zip &&
+          python3 -m zipfile -e pylance.zip %s && cd %s &&
+          awk 'BEGIN{RS=ORS=";"} /if\(!process/{sub(/return!0x1/, "return!0x0")} 1' extension/dist/server.bundle.js > extension/dist/server_crack.js && clear]],
+					pylance_path,
+					download_url,
+					version,
+					version
+				)
 			)
 		)
 	end
-	return string.format("%s%s/extension/dist/server.bundle.js", pylance_path, version)
+	return string.format("%s%s/extension/dist/server_crack.js", pylance_path, version)
 end
 
 local util = require("lspconfig.util")
