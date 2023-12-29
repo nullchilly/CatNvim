@@ -1,29 +1,3 @@
-local function get_pylance()
-	local version = "2023.7.20" -- Last known pylance version that works well
-	local download_url = string.format(
-		"https://ms-python.gallery.vsassets.io/_apis/public/gallery/publisher/ms-python/extension/vscode-pylance/%s/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage",
-		version
-	)
-	local pylance_path = vim.fn.stdpath("cache") .. "/pylance/"
-	if vim.fn.isdirectory(pylance_path .. version) == 0 then
-		vim.fn.mkdir(pylance_path, "p")
-		print(
-			os.execute(
-				string.format(
-					[[cd %s && wget %s -O pylance.zip &&
-          python3 -m zipfile -e pylance.zip %s && cd %s &&
-          awk 'BEGIN{RS=ORS=";"} /if\(!process/{sub(/return!0x1/, "return!0x0")} 1' extension/dist/server.bundle.js > extension/dist/server_crack.js && clear]],
-					pylance_path,
-					download_url,
-					version,
-					version
-				)
-			)
-		)
-	end
-	return string.format("%s%s/extension/dist/server_crack.js", pylance_path, version)
-end
-
 local util = require("lspconfig.util")
 
 local root_files = {
@@ -34,11 +8,31 @@ local root_files = {
 	"Pipfile",
 }
 
+local function organize_imports()
+	local params = {
+		command = "pylance.organizeimports",
+		arguments = { vim.uri_from_bufnr(0) },
+	}
+	vim.lsp.buf.execute_command(params)
+end
+
+local function set_python_path(path)
+	local clients = vim.lsp.get_active_clients({
+		bufnr = vim.api.nvim_get_current_buf(),
+		name = "pylance",
+	})
+	for _, client in ipairs(clients) do
+		client.config.settings =
+			vim.tbl_deep_extend("force", client.config.settings, { python = { pythonPath = path } })
+		client.notify("workspace/didChangeConfiguration", { settings = nil })
+	end
+end
+
 return {
 	default_config = {
 		cmd = {
 			"node",
-			get_pylance(),
+			vim.fn.expand("~/.vscode/extensions/ms-python.vscode-pylance-*/dist/server_nvim.js", false, true)[1],
 			"--stdio",
 		},
 		filetypes = { "python" },
@@ -49,5 +43,24 @@ return {
 				analysis = {},
 			},
 		},
+	},
+	commands = {
+		PylanceOrganizeImports = {
+			organize_imports,
+			description = "Organize Imports",
+		},
+		PylanceSetPythonPath = {
+			set_python_path,
+			description = "Reconfigure Pylance with the provided python path",
+			nargs = 1,
+			complete = "file",
+		},
+	},
+	docs = {
+		description = [[
+https://github.com/microsoft/pylance-release
+
+`pylance`, Fast, feature-rich language support for Python
+]],
 	},
 }

@@ -7,6 +7,7 @@ return {
 	},
 	{
 		"catppuccin/nvim",
+		priority = 1000,
 		name = "catppuccin",
 		opts = {
 			no_italic = true,
@@ -36,6 +37,8 @@ return {
 				},
 			},
 			integrations = {
+				dap = true,
+				dap_ui = false,
 				treesitter_context = true,
 				telescope = {
 					enabled = true,

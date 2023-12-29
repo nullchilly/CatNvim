@@ -12,12 +12,14 @@ return {
 					settings = {
 						python = {
 							analysis = {
+								diagnosticMode = "openFilesOnly",
 								-- include = { "workspaceroot/**" },
 								-- extraPaths = { vim.fn.getcwd() },
 								inlayHints = {
 									variableTypes = true,
 									functionReturnTypes = true,
 									callArgumentNames = true,
+									pytestParameters = true,
 								},
 							},
 						},
